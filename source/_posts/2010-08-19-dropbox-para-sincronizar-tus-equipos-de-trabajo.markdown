@@ -33,6 +33,16 @@ Algunos de ellos:
 * .screenrc (GNU screen)
 * .zshrc (zsh shell)
 
+> #### Actualización Nov 18th, 2012
+> 
+> Desde hace meses mantengo un repositorio público de dotfiles en GitHub con una
+> doble intención: Compartir mis configuraciones con la comunidad y
+> permitir la sincronización entre equipos sin requerir la instalación del
+> cliente Dropbox.
+> 
+> Podéis acceder a dicho repo desde
+> [danguita/dotfiles](https://github.com/danguita/dotfiles).
+
 ### Archivos de configuración
 
 * Archivos de preferencias, Bundles y Themes de IDEs y editores de texto
