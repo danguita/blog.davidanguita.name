@@ -1,0 +1,14 @@
+s/<[^>]*>//g
+s/&aacute;/á/g
+s/&eacute;/é/g
+s/&iacute;/í/g
+s/&oacute;/ó/g
+s/&uacute;/ú/g
+s/&ntilde;/ñ/g
+s/&iquest;/¿/g
+s/&mdash;/–/g
+s/&ndash;/–/g
+s/&amp;/&/g
+s/&reg;/©/g
+s/&trade;/™/g
+s/&nbsp;/ /g
