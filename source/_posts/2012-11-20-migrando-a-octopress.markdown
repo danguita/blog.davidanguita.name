@@ -3,7 +3,9 @@ layout: post
 title: "Migrando a Octopress"
 date: 2012-11-20 09:13
 comments: true
-categories: Blog Octopress
+categories:
+- Blog
+- Octopress
 ---
 
 ### Motivación
