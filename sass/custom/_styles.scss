@@ -10,6 +10,10 @@ html {
   background: $page-bg;
 }
 
+h1.entry-title {
+  font-size: 1.8em !important;
+}
+
 #main {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
