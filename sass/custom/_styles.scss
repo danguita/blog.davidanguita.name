@@ -13,3 +13,8 @@ h1.entry-title {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+
+// https://github.com/imathis/octopress/issues/986
+.gist .line-data {
+  width: 100%;
+}
