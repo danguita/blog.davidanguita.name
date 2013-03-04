@@ -92,7 +92,7 @@ The previous command will create the following structure under
 
     $ curl -o ~/shared/config/redmine/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
 
-After getting the Unicorn config example, you will need to tweak a few
+Once you get the Unicorn config example, you will need to tweak a few
 lines:
 
 * *worker_processes*: Number of Unicorn workers you need.
@@ -130,7 +130,7 @@ send a `QUIT` signal to the master process to stop all its workers.
 
 #### Modules
 
-You will need to enable these Apache2 modules:
+You will need to enable some Apache2 modules:
 
     sudo a2enmod rewrite
     sudo a2enmod proxy
@@ -139,8 +139,8 @@ You will need to enable these Apache2 modules:
 
 #### Proxy Unicorn processes 
 
-We have to set up a new VirtualHost as a proxy balancer of the master
-Unicorn process running at specified local port (*127.0.0.1:5000*):
+Now we have to set up a new VirtualHost as a proxy balancer of the master
+Unicorn process running at *127.0.0.1:5000*:
 
 {% gist 5077319 %}
 
@@ -149,12 +149,12 @@ to set it up if your resources are not being affected by I/O operations.
 
 ### Applying all
 
-After enabling the recently created VirtualHost and restarting the
-`apache2` service, a server proxy will be listening for processes on
-the specified host and port.
+After enabling the new VirtualHost and restarting the `apache2` service,
+a proxy will be listening for processes on the specified host and port.
 
-Now run the Unicorn process as shown above and Redmine should be served
-by the new VirtualHost.
+Now run the Unicorn process as shown above (`launch-redmine-unicorn` script)
+and Redmine application should start and be served through the new
+VirtualHost.
 
 Now it's time to do some tests in order to adjust the number of Unicorn workers
 you need to have running on your server.
