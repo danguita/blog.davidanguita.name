@@ -8,6 +8,7 @@ categories:
   - Rails
   - Unicorn
   - Apache
+  - Nginx
   - DevOps
 ---
 
@@ -75,7 +76,7 @@ After that you should run `bundle install` again:
 We do store all shared resources such as config, logs or process pids in a
 folder named `shared`:
 
-    $ mkdir -p ~/shared/{config/redmine,log/redmine,pid/redmine}
+    $ mkdir -p ~/shared/{config/redmine,log/redmine,pid/redmine,socket/redmine}
 
 The previous command will create the following structure under
 `/home/service`:
@@ -85,7 +86,9 @@ The previous command will create the following structure under
     │   │   └── redmine
     │   ├── log
     │   │   └── redmine
-    │   └── pid
+    │   ├── pid
+    │   │   └── redmine
+    │   └── socket
     │       └── redmine
 
 #### Config
@@ -98,6 +101,7 @@ lines:
 * *worker_processes*: Number of Unicorn workers you need.
 * *working directory*: `working_directory "/home/service/apps/redmine"`
 * *pid*: `pid "/home/service/shared/pid/redmine/unicorn.pid"`
+* *socket*: `listen "/home/service/shared/socket/redmine/unicorn.sock"`
 * *log*:
     `stderr_path "/home/service/shared/log/redmine/unicorn.stderr.log"`
     `stdout_path "/home/service/shared/log/redmine/unicorn.stdout.log"`
@@ -147,7 +151,7 @@ Unicorn process running at *127.0.0.1:5000*:
 Note that Apache logging was disabled for reducing I/O load. Feel free
 to set it up if your resources are not being affected by I/O operations.
 
-### Applying all
+### Applying it all
 
 After enabling the new VirtualHost and restarting the `apache2` service,
 a proxy will be listening for processes on the specified host and port.
@@ -158,3 +162,32 @@ VirtualHost.
 
 Now it's time to do some tests in order to adjust the number of Unicorn workers
 you need to have running on your server.
+
+## Bonus: Setting up Nginx as a frontend of Unicorn
+
+As some of you [have](http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303)
+[mentioned](http://twitter.com/mayoral), Nginx is generally a better choice
+for micro instances. It consumes much less RAM and it's faster than
+Apache due its event-driven approach.
+
+Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
+too so there we go:
+
+First of all, ensure you have defined the Unicorn socket path on
+`unicorn.conf.rb` (`listen` option), so your socket can be located in a path
+like this one: `/home/service/shared/socket/redmine/unicorn.sock`.
+
+Then, we'll tweak some options from the
+[sample nginx.conf file](https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf)
+shipped with Unicorn in order to *serve* our Unicorn processes:
+
+{% gist 5198040 %}
+
+Tweaks explained:
+
+* *UNIX domain socket*: `server unix:/home/service/shared/socket/redmine/unicorn.sock fail_timeout=0;` (L8)
+* *Name and proxy the upstream server*:
+`upstream redmine_unicorn` (L2) and `proxy_pass http://redmine_unicorn;` (L78)
+* *Site settings*: `server_name` (L30) and statics `root` path (38)
+
+Thank you for all your comments.
