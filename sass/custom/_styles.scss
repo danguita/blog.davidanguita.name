@@ -9,6 +9,10 @@ h1.entry-title {
   font-size: 1.8em !important;
 }
 
+.subtitle {
+  color: $subtitle-color;
+}
+
 #main {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
@@ -17,4 +21,5 @@ h1.entry-title {
 // https://github.com/imathis/octopress/issues/986
 .gist .line-data {
   width: 100%;
+  font-size: 0.7em;
 }
