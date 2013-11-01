@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: TTS | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/tts/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Text.to_speech through tts-api.com]]></title>
+    <link href="http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com/"/>
+    <updated>2012-11-23T09:09:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com</id>
+    <content type="html"><![CDATA[<p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
+
+<ul>
+<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
+</ul>
+
+
+<h4>Usage</h4>
+
+<p><div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+require_relative 'tts'
+
+class String
+  include TTS::String
+end
+
+&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
+</p>
+
+<!-- more -->
+
+
+<h4>Code</h4>
+
+<p><div><script src='https://gist.github.com/4065761.js?file=tts.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+# string.to_speech through tts-api.com
+
+require 'net/http'
+
+SERVICE_URI_FORMAT = &quot;http://tts-api.com/tts.mp3?q=%s&quot;
+
+module TTS
+  class Speech
+    def initialize text
+      response  = get_response(SERVICE_URI_FORMAT % text.to_url)
+
+      @text     = text
+      @location = response['location']
+      @filename = text.to_filename('mp3')
+    end
+
+    def to_mp3
+      download_here @location, @filename
+    end
+
+    def to_s
+      [@text, @location, @filename].join(' -&gt; ')
+    end
+
+    private
+
+    def get_response service_uri
+      Net::HTTP.get_response(URI.parse(service_uri))
+    end
+
+    def download_here url, filename
+      system &quot;curl -o #{filename} #{url}&quot;
+    end
+  end
+
+  module String
+    def to_speech
+      speech = Speech.new(self)
+
+      puts speech
+
+      speech.to_mp3
+    end
+
+    def to_url
+      gsub(' ', '+').safe
+    end
+
+    def to_filename extension = 'bin'
+      [(gsub(' ', '_')).safe, extension].join('.')
+    end
+
+    def safe
+      downcase.strip.gsub(/[^\w-]/, '')
+    end
+  end
+end</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,8 +9,7 @@
   <meta name="author" content="David Anguita">
 
   
-  <meta name="description" content="Redmine is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
+  <meta name="description" content="Hace algún tiempo abandoné clientes de escritorio como TweetDeck o Seesmic Desktop para pasar a utilizar el cliente web HootSuite como herramienta &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/">
+  <link rel="canonical" href="http://blog.davidanguita.name/page/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +85,7 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Setting up a cheap Redmine server using Unicorn and Apache</a></h1>
+      <h1 class="entry-title"><a href="/2010/02/13/como-gestiono-twitter-desde-hootsuite/">Cómo gestiono Twitter con HootSuite</a></h1>
     
     
       <p class="meta">
@@ -102,25 +101,23 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   
 
 
-<time datetime="2013-03-03T17:04:00+01:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2013</time>
+<time datetime="2010-02-13T00:00:00+01:00" pubdate data-updated="true">Feb 13<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
+  <div class="entry-content"><p>Hace algún tiempo abandoné clientes de escritorio como TweetDeck o Seesmic Desktop para pasar a utilizar el cliente web HootSuite como herramienta única de gestión de mi cuenta Twitter. El motivo no es otro que ser tan completo como cualquier cliente de escritorio actual y poseer una característica inherente a las aplicaciones web convencionales: Sólo necesito un navegador para utilizarla.
+HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos, pudiendo segmentar tu timeline en dos niveles: Pestañas y columnas.</p>
 
-<p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
-Redmine instance within our private domain.</p>
+<p>La naturaleza de ambos niveles es clara: Cada pestaña podrá contener columnas y cada columna mostrará los tweets que satisfacen la condición que aplica. Estas condiciones son las habituales según el API de Twitter (timeline público, menciones, favoritos y DMs), además de Listas y búsquedas almacenadas.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2010/02/13/como-gestiono-twitter-desde-hootsuite/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -132,7 +129,7 @@ Redmine instance within our private domain.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Paperclip defaults for Amazon S3 virtual hosted-style requests</a></h1>
+      <h1 class="entry-title"><a href="/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/">La &#8220;Cheat Sheet&#8221; que todos hemos hecho alguna vez</a></h1>
     
     
       <p class="meta">
@@ -148,43 +145,22 @@ Redmine instance within our private domain.</p>
   
 
 
-<time datetime="2012-12-07T17:47:00+01:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+<time datetime="2010-01-07T00:00:00+01:00" pubdate data-updated="true">Jan 7<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+  <div class="entry-content"><p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
 
-<p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
-
-<figure class='code'><figcaption><span>config/environments/production.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_BUCKET&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -196,7 +172,7 @@ Redmine instance within our private domain.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/11/23/text-to-speech-through-tts-api-com/">Text.to_speech through tts-api.com</a></h1>
+      <h1 class="entry-title"><a href="/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux/">Línea del tiempo de distribuciones GNU/Linux</a></h1>
     
     
       <p class="meta">
@@ -212,41 +188,73 @@ Redmine instance within our private domain.</p>
   
 
 
-<time datetime="2012-11-23T09:09:00+01:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2009-12-29T00:00:00+01:00" pubdate data-updated="true">Dec 29<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
+  <div class="entry-content"><p>Desde <a href="http://futurist.se/gldt">http://futurist.se/gldt/</a> se está realizando un gran trabajo creando y manteniendo un mapa de distribuciones GNU/Linux que abarca su evolución, derivaciones y bifurcaciones en el tiempo partiendo de distribuciones &#8220;maestras&#8221; como Debian, Slackware, Red Hat y muchas otras.</p>
+
+<p>A continuación os muestro la última versión hasta el momento (9.3). Es posible que existan actualizaciones en el fichero debido a que ciertas familias de distribuciones están en constante derivación, todo ello está correctamente versionado en http://futurist.se/gldt/.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/05/css-extendido-con-less/">CSS extendido con LESS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-05T00:00:00+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
+
+<p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
 
 <ul>
-<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
+<li>Variables</li>
+<li>Mixins</li>
+<li>Reglas anidadas</li>
+<li>Operaciones</li>
 </ul>
 
 
-<h4>Usage</h4>
-
-<div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-
-require_relative 'tts'
-
-class String
-  include TTS::String
-end
-
-&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
-
-
-
-
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2012/11/23/text-to-speech-through-tts-api-com/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2009/12/05/css-extendido-con-less/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -258,7 +266,7 @@ end
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/11/20/migrando-a-octopress/">Migrando a Octopress</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/">Resaltado de sintaxis en Aptana Studio</a></h1>
     
     
       <p class="meta">
@@ -274,70 +282,22 @@ end
   
 
 
-<time datetime="2012-11-20T09:13:00+01:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
+<time datetime="2009-11-27T00:00:00+01:00" pubdate data-updated="true">Nov 27<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>Motivación</h3>
+  <div class="entry-content"><p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
 
-<p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
-
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
+<p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2012/11/20/migrando-a-octopress/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Dropbox para sincronizar tus equipos de trabajo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-19T00:00:00+02:00" pubdate data-updated="true">Aug 19<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
-
-<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
-
-<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -346,9 +306,11 @@ end
   
   <div class="pagination">
     
-      <a class="prev" href="/page/2/">&larr; Older</a>
+      <a class="prev" href="/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
     
   </div>
 </div>

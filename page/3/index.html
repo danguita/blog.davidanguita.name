@@ -9,8 +9,7 @@
   <meta name="author" content="David Anguita">
 
   
-  <meta name="description" content="Redmine is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
+  <meta name="description" content="Recientemente he trabajado con la tecnología Adobe AIR 1.5 en su perfil AJAX, que nos permite desarrollar RIA (Rich Internet Applications) como &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/">
+  <link rel="canonical" href="http://blog.davidanguita.name/page/3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +85,7 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Setting up a cheap Redmine server using Unicorn and Apache</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/26/distribucion-del-runtime-adobe-air/">Distribución del Runtime Adobe AIR</a></h1>
     
     
       <p class="meta">
@@ -102,25 +101,22 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   
 
 
-<time datetime="2013-03-03T17:04:00+01:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2013</time>
+<time datetime="2009-11-26T00:00:00+01:00" pubdate data-updated="true">Nov 26<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
+  <div class="entry-content"><p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
 
-<p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
-Redmine instance within our private domain.</p>
+<p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2009/11/26/distribucion-del-runtime-adobe-air/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -132,7 +128,7 @@ Redmine instance within our private domain.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Paperclip defaults for Amazon S3 virtual hosted-style requests</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux/">MacPorts, imprescindible para el switcher desde GNU/Linux</a></h1>
     
     
       <p class="meta">
@@ -148,43 +144,24 @@ Redmine instance within our private domain.</p>
   
 
 
-<time datetime="2012-12-07T17:47:00+01:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+<time datetime="2009-11-08T00:00:00+01:00" pubdate data-updated="true">Nov 8<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+  <div class="entry-content"><p>Siempre que en la comunidad Mac nos referimos a switcher, todo nos lleva a pensar que se trata de un usuario que abandona el tedioso Microsoft Windows para pasar a Mac OS X, aunque no es menos habitual que un switcher proceda de otros Sistemas Operativos como GNU/Linux. Este fue mi caso concreto, aunque no puedo considerarme switcher ya que nunca abandoné mi sistema original, los compagino muy a menudo aunque es cierto que el sistema en el que trabajo más horas diarias es OS X.</p>
 
-<p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
+<p>Los usuarios de GNU/Linux en prácticamente cualquiera de sus distribuciones estarán habituados al concepto de sistema de gestión de paquetes (como es APT en distribuciones Debian/Ubuntu), algo de lo que no podemos disfrutar nativamente en nuestros OS X y que nos abstraería de arduas instalaciones de software desde los fuentes.</p>
 
-<figure class='code'><figcaption><span>config/environments/production.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
-</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_BUCKET&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
-</span><span class='line'>    <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>Ante esta dificultad para instalar software libre/opensource en sistemas Darwin (base de Mac OS X) surge MacPorts (originalmente conocido como DarwinPorts), que integra un completo repositorio de paquetes portados a Darwin que pueden ser gestionados a través de órdenes sencillas como éstas:</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -196,7 +173,7 @@ Redmine instance within our private domain.</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/2012/11/23/text-to-speech-through-tts-api-com/">Text.to_speech through tts-api.com</a></h1>
+      <h1 class="entry-title"><a href="/2009/11/07/repositorios-de-snippets-para-todos/">Repositorios de Snippets para todos</a></h1>
     
     
       <p class="meta">
@@ -212,132 +189,21 @@ Redmine instance within our private domain.</p>
   
 
 
-<time datetime="2012-11-23T09:09:00+01:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2009-11-07T00:00:00+01:00" pubdate data-updated="true">Nov 7<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
-
-<ul>
-<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
-</ul>
-
-
-<h4>Usage</h4>
-
-<div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-
-require_relative 'tts'
-
-class String
-  include TTS::String
-end
-
-&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
-
-
-
+  <div class="entry-content"><p>Un buen medio de formación, inspiración o resolución de problemas de todo desarrollador de software siempre ha sido el código de ejemplo junto al API o manual de turno, es por ello que me gustaría recomendar algunos sitios web que recopilan Snippets o fragmentos de código con un propósito específico, modulares y por tanto reutilizables, escritos prácticamente en cualquier lenguaje. Algunos repositorios van más allá albergando scripts de sistema, ficheros de configuración de servicios, recomendaciones para el uso de editores de texto y un largo etcétera.
+La mayoría de estos sitios web incluyen completas posibilidades colaborativas, permitiendo así que cualquier usuario registrado pueda comentar y proponer alternativas o correcciones al contenido (en forma de Snippet) publicado por otro usuario.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/2012/11/23/text-to-speech-through-tts-api-com/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/20/migrando-a-octopress/">Migrando a Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-20T09:13:00+01:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Motivación</h3>
-
-<p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
-
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/20/migrando-a-octopress/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Dropbox para sincronizar tus equipos de trabajo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-19T00:00:00+02:00" pubdate data-updated="true">Aug 19<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
-
-<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
-
-<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Continue reading &rarr;</a>
+      <a rel="full-article" href="/2009/11/07/repositorios-de-snippets-para-todos/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -346,9 +212,9 @@ end
   
   <div class="pagination">
     
-      <a class="prev" href="/page/2/">&larr; Older</a>
-    
     <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
     
   </div>
 </div>

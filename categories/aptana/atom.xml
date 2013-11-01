@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Aptana | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/aptana/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resaltado de sintaxis en Aptana Studio]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/"/>
+    <updated>2009-11-27T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio</id>
+    <content type="html"><![CDATA[<p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
+
+<p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
+
+<!-- more -->
+
+
+<h4><a href="http://gueschla.com/labs/green-chaud/">Green Chaud</a></h4>
+
+<p><img class="center" src="/images/greenchaud.jpg" title="Green Chaud" ></p>
+
+<h4><a href="http://thirdroute.com/autumna-a-style-for-aptana-ide/">Autumna – A style for Aptana IDE</a></h4>
+
+<p><img class="center" src="/images/autumna.jpg" title="Autumna" ></p>
+
+<h4><a href="http://www.nightlion.net/themes/2009/aptana-dark-color-theme/">Aptana Studio IDE Dark Color Theme</a></h4>
+
+<p><img class="center" src="/images/dark_color_theme.jpg" title="Dark Color Theme" ></p>
+
+<h4><a href="http://forums.aptana.com/viewtopic.php?f=20&amp;t=2214">Dark (TextMate like) syntax colouring</a></h4>
+
+<p><img class="center" src="/images/dark_textmate.jpg" title="Dark Textmate" ></p>
+
+<h4><a href="http://www.johnrockefeller.net/aptana-color-themes/">Dark Red &amp; Dark Blue Aptana Color Themes</a></h4>
+
+<p><img class="center" src="/images/darkblue.jpg" title="Dark Blue" ></p>
+
+<h3>Instrucciones de importación de estilos en los Editores</h3>
+
+<p><em>Aptana gestiona distintos Editores para los diferentes lenguajes:</em></p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana (variable según el sistema operativo)</li>
+<li>Abrimos el árbol de preferencias: Aptana &rarr; Editors &rarr; (Lenguaje) &rarr; Colors</li>
+<li>Importamos el fichero de estilo a través del botón <em>Import</em></li>
+</ol>
+
+
+<p>Otra opción muy cómoda sería:</p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana</li>
+<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto "color" para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
+</ol>
+
+
+<p>Enlace de interés (sobre la importación de estilos): <a href="http://www.johnrockefeller.net/how-to-install-an-aptana-color-theme/">How To Install An Aptana Color Theme</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Migrando a Octopress]]></title>
+    <link href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/"/>
+    <updated>2012-11-20T09:13:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2012/11/20/migrando-a-octopress</id>
+    <content type="html"><![CDATA[<h3>Motivación</h3>
+
+<p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
+
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que "esto es lo que estaba buscando".</p>
+
+<!-- more -->
+
+
+<h3><em>Esto es lo que estaba buscando</em></h3>
+
+<p>Su autor define Octopress como <em>"A blogging framework for hackers"</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
+
+<p>Está basado en el generador de sitios estáticos <a href="https://github.com/mojombo/jekyll">Jekyll</a>, especialmente utilizado para construir blogs y ahora motor de <a href="http://pages.github.com/">GitHub Pages</a>, al que Octopress especializa como plataforma de blogging <em>ready-to-use</em> a través templates en front-end (HTML5, responsive layout, Compass…) y una colección de herramientas con las que generar y gestionar los contenidos.</p>
+
+<p>Una de sus principales características es la de generar un sitio completamente estático (únicamente archivos HTML en una estructura de directorios), a partir de un archivo de reglas y los propios fuentes del contenido.</p>
+
+<p>Ventajas y desventajas:</p>
+
+<ul>
+<li>El servidor se limitará a servir estáticos, lo que será tremendamente
+eficiente.</li>
+<li>Gran comodidad de despliegue:
+
+<ul>
+<li>Los requisitos en servidor son mínimos.</li>
+<li>Puedes deplegarlo de forma gratuita en servicios como <a href="http://octopress.org/docs/deploying/github/">GitHub Pages</a> o <a href="http://octopress.org/docs/deploying/heroku/">Heroku</a>.</li>
+</ul>
+</li>
+<li>Existe un proceso para regenerar todo el site, que puede ser lento si el volumen de posts es grande.</li>
+</ul>
+
+
+<h3>Migración</h3>
+
+<h4>Exportación desde Posterous</h4>
+
+<p>Usando el <a href="https://github.com/pepijndevos/jekyll/blob/patch-1/lib/jekyll/migrators/posterous.rb">script de migración</a> proporcionado por la comunidad de Jekyll el proceso fue sencillo. El script hace uso del <a href="http://posterous.com/api">API de Posterous</a> para, previa autorización vía user/pass + api_token, volcar el contenido de tus posts en archivos HTML y descargar las imágenes asociadas:</p>
+
+<pre><code>$ ruby posterous.rb &lt;username&gt; &lt;password&gt; &lt;api_token&gt;
+</code></pre>
+
+<p>El script realiza la exportación del <em>Site</em> o <em>Space</em> configurado como primario. Para realizar la exportación de cualquier otro <em>Site</em> del que seas propietario será necesario editar la línea <a href="https://github.com/pepijndevos/jekyll/blob/patch-1/lib/jekyll/migrators/posterous.rb#L21">#21</a> especificando su id de esta forma: <code>site = Site.find(&lt;site_id&gt;)</code>.</p>
+
+<p>Para obtener esta información puedes usar la gema <a href="https://github.com/posterous/posterous-gem/">posterous-gem</a> en un script Ruby o ejecutar el cliente interactivo proporcionado en <code>bin/posterous</code>. Esta gema actúa como cliente oficial del API y puedes lanzar acciones como <code>&gt; Site.all.pluck(:id)</code> para obtener los ids de tus <em>Sites</em>.</p>
+
+<h4>Procesado</h4>
+
+<p>Para favorecer la mantenibilidad de los posts anteriores he preferido convertirlos a <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>:</p>
+
+<ol>
+<li>Eliminación de <em>markup</em> HTML y conversión de caracteres aplicando <a href="https://github.com/danguita/blog.davidanguita.name/blob/master/lib/migration-replacements">estos reemplazos</a>.</li>
+<li>Inserción de imágenes a través del plugin <a href="http://octopress.org/docs/plugins/image-tag/">Image Tag</a>.</li>
+<li>Conversión de nombres de archivo (extensión .html a .markdown para que el generador de Jekyll procese los archivos con este formato).</li>
+</ol>
+
+
+<h4>Despliegue en GitHub Pages</h4>
+
+<p>Fue pan comido con las <a href="http://octopress.org/docs/deploying/github/">herramientas</a> proporcionadas:</p>
+
+<p>El script de inicialización <code>setup_github_pages</code> realiza <em>automágicamente</em> los ajustes de despliegue para que la tarea <code>deploy</code> realice su cometido:</p>
+
+<ol>
+<li>Regenerar el sitio.</li>
+<li>Copiar los archivos generados al directorio <code>_deploy</code>.</li>
+<li>Push hacia el repo en GitHub, en mi caso bajo el branch <code>gh-pages</code> al tratarse de una <a href="https://help.github.com/articles/user-organization-and-project-pages"><em>Project Page</em></a>.</li>
+</ol>
+
+
+<h3>Conclusión</h3>
+
+<p>He escrito este post en formato Markdown usando Vim, he usado <code>preview</code> para revisarlo en el layout definitivo y hecho esto está listo para regenerar y desplegar en GitHub. Mola.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nginx | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up a cheap Redmine server using Unicorn and Apache]]></title>
+    <link href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
+    <updated>2013-03-03T17:04:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
+    <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
+It's open source, free and is built using Ruby on Rails.</p>
+
+<p>We use Redmine as our main tool for planning, issue tracking and
+documenting processes. It's an everyday tool so we need to have an always ready
+Redmine instance within our private domain.</p>
+
+<!-- more -->
+
+
+<h3>Get a small VPS server</h3>
+
+<p>We use an Amazon EC2 t1.micro instance running Ubuntu Precise 64-bit as
+development server.</p>
+
+<p>This <em>machine</em> is mainly managing a Git server with dozens of repos (and
+backing them up as a S3 filesystem) and a Redmine instance.</p>
+
+<p>As described on <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 docs</a>,
+this instance type has pretty basic resources, but are enough for running
+some lightweight processes with low I/O load.</p>
+
+<h4>Add your service user</h4>
+
+<p>We're so bad choosing funny names so our service username is <code>service</code>.</p>
+
+<h3>Redmine</h3>
+
+<p>Log in as your service user and clone the latest Redmine tree:</p>
+
+<pre><code>$ mkdir -p ~/apps/redmine
+$ git clone git://github.com/redmine/redmine.git ~/apps/redmine
+</code></pre>
+
+<p>Install and set up your database engine server (MySQL, PostgreSQL…) and edit the
+<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you'll
+be ready to set up the production environment:</p>
+
+<pre><code>$ cd ~/apps/redmine
+$ bundle install --without development test
+$ RAILS_ENV=production bundle exec rake db:migrate
+</code></pre>
+
+<h3>Unicorn</h3>
+
+<h4>"unicorn" gem</h4>
+
+<p>Add the <code>unicorn</code> gem as an application dependency by adding a
+<code>Gemfile.local</code> file (unobtrusive way to add dependencies)
+with this content:</p>
+
+<p>``` ruby ~/apps/redmine/Gemfile.local
+source 'https://rubygems.org'</p>
+
+<p>gem 'unicorn'
+```</p>
+
+<p>After that you should run <code>bundle install</code> again:</p>
+
+<pre><code>$ cd ~/apps/redmine
+$ bundle install --without development test
+</code></pre>
+
+<h4>Filesystem</h4>
+
+<p>We do store all shared resources such as config, logs or process pids in a
+folder named <code>shared</code>:</p>
+
+<pre><code>$ mkdir -p ~/shared/{config/redmine,log/redmine,pid/redmine,socket/redmine}
+</code></pre>
+
+<p>The previous command will create the following structure under
+<code>/home/service</code>:</p>
+
+<pre><code>├── shared
+│   ├── config
+│   │   └── redmine
+│   ├── log
+│   │   └── redmine
+│   ├── pid
+│   │   └── redmine
+│   └── socket
+│       └── redmine
+</code></pre>
+
+<h4>Config</h4>
+
+<pre><code>$ curl -o ~/shared/config/redmine/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
+</code></pre>
+
+<p>Once you get the Unicorn config example, you will need to tweak a few
+lines:</p>
+
+<ul>
+<li><em>worker_processes</em>: Number of Unicorn workers you need.</li>
+<li><em>working directory</em>: <code>working_directory "/home/service/apps/redmine"</code></li>
+<li><em>pid</em>: <code>pid "/home/service/shared/pid/redmine/unicorn.pid"</code></li>
+<li><em>socket</em>: <code>listen "/home/service/shared/socket/redmine/unicorn.sock"</code></li>
+<li><em>log</em>:
+  <code>stderr_path "/home/service/shared/log/redmine/unicorn.stderr.log"</code>
+  <code>stdout_path "/home/service/shared/log/redmine/unicorn.stdout.log"</code></li>
+</ul>
+
+
+<h4>"Automate everything"</h4>
+
+<p>We put all service-related scripts in the <code>~/script</code> directory.
+These commands might help you on launching and stopping Unicorn
+processes:</p>
+
+<p><code>bash ~/script/launch-redmine-unicorn
+cd /home/service/apps/redmine &amp;&amp; unicorn_rails -c /home/service/shared/config/redmine/unicorn.rb -p 5000 -E production -D
+</code></p>
+
+<p>Command explanation:</p>
+
+<ul>
+<li><code>-c</code> sets the config file (<em>/home/service/shared/config/redmine/unicorn.rb</em>)</li>
+<li><code>-p</code> sets the port of the master Unicorn process (<em>5000</em>)</li>
+<li><code>-E</code> sets the environment (<em>production</em>)</li>
+<li><code>-D</code> daemonizes the command</li>
+</ul>
+
+
+<p><code>bash ~/script/stop-redmine-unicorn
+kill -QUIT $(cat /home/service/shared/pid/redmine/unicorn.pid)
+</code></p>
+
+<p>Because <a href="http://tomayko.com/writings/unicorn-is-unix">Unicorn is Unix</a> you can
+send a <code>QUIT</code> signal to the master process to stop all its workers.</p>
+
+<h3>Apache</h3>
+
+<h4>Modules</h4>
+
+<p>You will need to enable some Apache2 modules:</p>
+
+<pre><code>sudo a2enmod rewrite
+sudo a2enmod proxy
+sudo a2enmod proxy_balancer
+sudo a2enmod proxy_http
+</code></pre>
+
+<h4>Proxy Unicorn processes</h4>
+
+<p>Now we have to set up a new VirtualHost as a proxy balancer of the master
+Unicorn process running at <em>127.0.0.1:5000</em>:</p>
+
+<p><div><script src='https://gist.github.com/5077319.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>Note that Apache logging was disabled for reducing I/O load. Feel free
+to set it up if your resources are not being affected by I/O operations.</p>
+
+<h3>Applying it all</h3>
+
+<p>After enabling the new VirtualHost and restarting the <code>apache2</code> service,
+a proxy will be listening for processes on the specified host and port.</p>
+
+<p>Now run the Unicorn process as shown above (<code>launch-redmine-unicorn</code> script)
+and Redmine application should start and be served through the new
+VirtualHost.</p>
+
+<p>Now it's time to do some tests in order to adjust the number of Unicorn workers
+you need to have running on your server.</p>
+
+<h2>Bonus: Setting up Nginx as a frontend of Unicorn</h2>
+
+<p>As some of you <a href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303">have</a>
+<a href="http://twitter.com/mayoral">mentioned</a>, Nginx is generally a better choice
+for micro instances. It consumes much less RAM and it's faster than
+Apache due its event-driven approach.</p>
+
+<p>Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
+too so there we go:</p>
+
+<p>First of all, ensure you have defined the Unicorn socket path on
+<code>unicorn.conf.rb</code> (<code>listen</code> option), so your socket can be located in a path
+like this one: <code>/home/service/shared/socket/redmine/unicorn.sock</code>.</p>
+
+<p>Then, we'll tweak some options from the
+<a href="https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf">sample nginx.conf file</a>
+shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
+
+<p><div><script src='https://gist.github.com/5198040.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>Tweaks explained:</p>
+
+<ul>
+<li><em>UNIX domain socket</em>: <code>server unix:/home/service/shared/socket/redmine/unicorn.sock fail_timeout=0;</code> (L8)</li>
+<li><em>Name and proxy the upstream server</em>:
+<code>upstream redmine_unicorn</code> (L2) and <code>proxy_pass http://redmine_unicorn;</code> (L78)</li>
+<li><em>Site settings</em>: <code>server_name</code> (L30) and statics <code>root</code> path (38)</li>
+</ul>
+
+
+<p>Thank you for all your comments.</p>
+]]></content>
+  </entry>
+  
+</feed>

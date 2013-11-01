@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Front-end | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/front-end/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS extendido con LESS]]></title>
+    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
+    <updated>2009-12-05T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
+    <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
+
+<p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
+
+<ul>
+<li>Variables</li>
+<li>Mixins</li>
+<li>Reglas anidadas</li>
+<li>Operaciones</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Variables</h3>
+
+<p>Permite definir atributos en el documento CSS y asignarlos a múltiples clases, por lo que las modificaciones de estos atributos tienen repercusión de forma global.</p>
+
+<p>``` css</p>
+
+<h1>colors {</h1>
+
+<p>  header: #fff;
+  wrapper: #000;
+  footer: blue;
+}
+```</p>
+
+<p>A los que accederemos con:</p>
+
+<p><code>css
+.wrapper {
+  color: #colors[@wrapper];
+}
+</code></p>
+
+<h3>Mixins</h3>
+
+<p>Permite asociar todos los atributos de una clase a cualquier otra, permitiendo también el paso de parámetros a la primera, lo que a efectos prácticos la convierte en una función que devuelve una serie de atributos.</p>
+
+<p><code>css
+.bordered(@color: #fff) {
+  border: 1px solid @color;
+}
+</code></p>
+
+<h3>Reglas anidadas</h3>
+
+<p>Permite definir la jerarquía de clases en el DOM estableciendo unas claras reglas de herencia.</p>
+
+<p>``` css</p>
+
+<h1>header {</h1>
+
+<p>  background-color: #000;
+  .wrapper {</p>
+
+<pre><code>width: 960px;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>Operaciones</h3>
+
+<p>Aporta un dinamismo relativo a la generación de CSS permitiendo aplicar operaciones aritméticas a valores y colores definidos en la hoja de estilo.</p>
+
+<p><code>css
+.wrapper {
+  background-color: #888 / 2 + #000;
+}
+</code></p>
+
+<p>Para trabajar con LESS, una vez instalado en nuestro sistema a través de ruby-gems, editaremos un archivo con extensión .less que utilizaremos para generar el CSS estándar de forma automática a través de la gema.</p>
+
+<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de http://github.com/cloudhead/less/tree):</p>
+
+<h4>LESS</h4>
+
+<p>``` css
+@dark: #110011;</p>
+
+<p>.outline (@width: 1) {
+  border: (@width * 10px) solid black;
+}</p>
+
+<p>.article {
+  a { text-decoration: none }
+  p { color: @dark }
+  .outline(3);
+}
+```</p>
+
+<h4>CSS</h4>
+
+<p>``` css
+.article a { text-decoration: none }</p>
+
+<p>.article p { color: #110011 }</p>
+
+<p>.article { border: 30px solid black }
+```</p>
+
+<p>Recordemos que no estamos hablando de CSS dinámico, sino de una especificación extendida del CSS estático que conocemos. Las técnicas de CSS dinámico requieren generalmente un servidor o intérprete y tienen objetivos adicionales a flexibilizar el proceso de desarrollo.</p>
+
+<p>LESS es open source bajo Licencia Apache y mantiene un repositorio público en github desde <a href="http://github.com/cloudhead/less">este proyecto</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

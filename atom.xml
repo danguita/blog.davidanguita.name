@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up a cheap Redmine server using Unicorn and Apache]]></title>
+    <link href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
+    <updated>2013-03-03T17:04:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
+    <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
+It&#8217;s open source, free and is built using Ruby on Rails.</p>
+
+<p>We use Redmine as our main tool for planning, issue tracking and
+documenting processes. It&#8217;s an everyday tool so we need to have an always ready
+Redmine instance within our private domain.</p>
+
+<!-- more -->
+
+
+<h3>Get a small VPS server</h3>
+
+<p>We use an Amazon EC2 t1.micro instance running Ubuntu Precise 64-bit as
+development server.</p>
+
+<p>This <em>machine</em> is mainly managing a Git server with dozens of repos (and
+backing them up as a S3 filesystem) and a Redmine instance.</p>
+
+<p>As described on <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 docs</a>,
+this instance type has pretty basic resources, but are enough for running
+some lightweight processes with low I/O load.</p>
+
+<h4>Add your service user</h4>
+
+<p>We&#8217;re so bad choosing funny names so our service username is <code>service</code>.</p>
+
+<h3>Redmine</h3>
+
+<p>Log in as your service user and clone the latest Redmine tree:</p>
+
+<pre><code>$ mkdir -p ~/apps/redmine
+$ git clone git://github.com/redmine/redmine.git ~/apps/redmine
+</code></pre>
+
+<p>Install and set up your database engine server (MySQL, PostgreSQL…) and edit the
+<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&#8217;ll
+be ready to set up the production environment:</p>
+
+<pre><code>$ cd ~/apps/redmine
+$ bundle install --without development test
+$ RAILS_ENV=production bundle exec rake db:migrate
+</code></pre>
+
+<h3>Unicorn</h3>
+
+<h4>&#8220;unicorn&#8221; gem</h4>
+
+<p>Add the <code>unicorn</code> gem as an application dependency by adding a
+<code>Gemfile.local</code> file (unobtrusive way to add dependencies)
+with this content:</p>
+
+<figure class='code'><figcaption><span>~/apps/redmine/Gemfile.local</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;unicorn&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that you should run <code>bundle install</code> again:</p>
+
+<pre><code>$ cd ~/apps/redmine
+$ bundle install --without development test
+</code></pre>
+
+<h4>Filesystem</h4>
+
+<p>We do store all shared resources such as config, logs or process pids in a
+folder named <code>shared</code>:</p>
+
+<pre><code>$ mkdir -p ~/shared/{config/redmine,log/redmine,pid/redmine,socket/redmine}
+</code></pre>
+
+<p>The previous command will create the following structure under
+<code>/home/service</code>:</p>
+
+<pre><code>├── shared
+│   ├── config
+│   │   └── redmine
+│   ├── log
+│   │   └── redmine
+│   ├── pid
+│   │   └── redmine
+│   └── socket
+│       └── redmine
+</code></pre>
+
+<h4>Config</h4>
+
+<pre><code>$ curl -o ~/shared/config/redmine/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
+</code></pre>
+
+<p>Once you get the Unicorn config example, you will need to tweak a few
+lines:</p>
+
+<ul>
+<li><em>worker_processes</em>: Number of Unicorn workers you need.</li>
+<li><em>working directory</em>: <code>working_directory "/home/service/apps/redmine"</code></li>
+<li><em>pid</em>: <code>pid "/home/service/shared/pid/redmine/unicorn.pid"</code></li>
+<li><em>socket</em>: <code>listen "/home/service/shared/socket/redmine/unicorn.sock"</code></li>
+<li><em>log</em>:
+  <code>stderr_path "/home/service/shared/log/redmine/unicorn.stderr.log"</code>
+  <code>stdout_path "/home/service/shared/log/redmine/unicorn.stdout.log"</code></li>
+</ul>
+
+
+<h4>&#8220;Automate everything&#8221;</h4>
+
+<p>We put all service-related scripts in the <code>~/script</code> directory.
+These commands might help you on launching and stopping Unicorn
+processes:</p>
+
+<figure class='code'><figcaption><span>~/script/launch-redmine-unicorn</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /home/service/apps/redmine <span class="o">&amp;&amp;</span> unicorn_rails -c /home/service/shared/config/redmine/unicorn.rb -p 5000 -E production -D
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Command explanation:</p>
+
+<ul>
+<li><code>-c</code> sets the config file (<em>/home/service/shared/config/redmine/unicorn.rb</em>)</li>
+<li><code>-p</code> sets the port of the master Unicorn process (<em>5000</em>)</li>
+<li><code>-E</code> sets the environment (<em>production</em>)</li>
+<li><code>-D</code> daemonizes the command</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>~/script/stop-redmine-unicorn</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">kill</span> -QUIT <span class="k">$(</span>cat /home/service/shared/pid/redmine/unicorn.pid<span class="k">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because <a href="http://tomayko.com/writings/unicorn-is-unix">Unicorn is Unix</a> you can
+send a <code>QUIT</code> signal to the master process to stop all its workers.</p>
+
+<h3>Apache</h3>
+
+<h4>Modules</h4>
+
+<p>You will need to enable some Apache2 modules:</p>
+
+<pre><code>sudo a2enmod rewrite
+sudo a2enmod proxy
+sudo a2enmod proxy_balancer
+sudo a2enmod proxy_http
+</code></pre>
+
+<h4>Proxy Unicorn processes</h4>
+
+<p>Now we have to set up a new VirtualHost as a proxy balancer of the master
+Unicorn process running at <em>127.0.0.1:5000</em>:</p>
+
+<div><script src='https://gist.github.com/5077319.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>Note that Apache logging was disabled for reducing I/O load. Feel free
+to set it up if your resources are not being affected by I/O operations.</p>
+
+<h3>Applying it all</h3>
+
+<p>After enabling the new VirtualHost and restarting the <code>apache2</code> service,
+a proxy will be listening for processes on the specified host and port.</p>
+
+<p>Now run the Unicorn process as shown above (<code>launch-redmine-unicorn</code> script)
+and Redmine application should start and be served through the new
+VirtualHost.</p>
+
+<p>Now it&#8217;s time to do some tests in order to adjust the number of Unicorn workers
+you need to have running on your server.</p>
+
+<h2>Bonus: Setting up Nginx as a frontend of Unicorn</h2>
+
+<p>As some of you <a href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303">have</a>
+<a href="http://twitter.com/mayoral">mentioned</a>, Nginx is generally a better choice
+for micro instances. It consumes much less RAM and it&#8217;s faster than
+Apache due its event-driven approach.</p>
+
+<p>Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
+too so there we go:</p>
+
+<p>First of all, ensure you have defined the Unicorn socket path on
+<code>unicorn.conf.rb</code> (<code>listen</code> option), so your socket can be located in a path
+like this one: <code>/home/service/shared/socket/redmine/unicorn.sock</code>.</p>
+
+<p>Then, we&#8217;ll tweak some options from the
+<a href="https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf">sample nginx.conf file</a>
+shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
+
+<div><script src='https://gist.github.com/5198040.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>Tweaks explained:</p>
+
+<ul>
+<li><em>UNIX domain socket</em>: <code>server unix:/home/service/shared/socket/redmine/unicorn.sock fail_timeout=0;</code> (L8)</li>
+<li><em>Name and proxy the upstream server</em>:
+<code>upstream redmine_unicorn</code> (L2) and <code>proxy_pass http://redmine_unicorn;</code> (L78)</li>
+<li><em>Site settings</em>: <code>server_name</code> (L30) and statics <code>root</code> path (38)</li>
+</ul>
+
+
+<p>Thank you for all your comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Paperclip defaults for Amazon S3 virtual hosted-style requests]]></title>
+    <link href="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/"/>
+    <updated>2012-12-07T17:47:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+
+<p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
+
+<figure class='code'><figcaption><span>config/environments/production.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_BUCKET&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>Otherwise, if you need to use virtual hosted-style requests like <code>http://yourbucket.s3.amazonaws.com</code>, you <strong>must</strong> specify the <code>path</code> and <code>url</code> options:</p>
+
+<figure class='code'><figcaption><span>config/environments/production.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="s2">&quot;:s3_domain_url&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;:class/:id.:style.:extension&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_BUCKET&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Important notes</h3>
+
+<ul>
+<li>For now (<code>3.3.1</code>) you will get a <code>Paperclip::InfiniteInterpolationError</code> exception if the <code>path</code> option is not specified.</li>
+<li>The value of the <code>url</code> option must be <code>":s3_domain_url"</code> as a string, not as a symbol.</li>
+<li>The <code>path</code> option is fully customizable. The shown pattern will produce filepaths like <code>http://yourbucket.s3.amazonaws.com/images/1.thumb.png</code>.</li>
+</ul>
+
+
+<h3>References</h3>
+
+<ul>
+<li><a href="https://github.com/thoughtbot/paperclip#readme">Paperclip on GitHub</a></li>
+<li><a href="http://rubydoc.info/gems/paperclip/Paperclip/Storage/S3">Paperclip::Storage::S3 documentation</a></li>
+<li><a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/LocationSelection.html">AWS Buckets and Regions</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Text.to_speech through tts-api.com]]></title>
+    <link href="http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com/"/>
+    <updated>2012-11-23T09:09:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com</id>
+    <content type="html"><![CDATA[<p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
+
+<ul>
+<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
+</ul>
+
+
+<h4>Usage</h4>
+
+<div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+require_relative 'tts'
+
+class String
+  include TTS::String
+end
+
+&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
+
+
+
+
+<!-- more -->
+
+
+<h4>Code</h4>
+
+<div><script src='https://gist.github.com/4065761.js?file=tts.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+# string.to_speech through tts-api.com
+
+require 'net/http'
+
+SERVICE_URI_FORMAT = &quot;http://tts-api.com/tts.mp3?q=%s&quot;
+
+module TTS
+  class Speech
+    def initialize text
+      response  = get_response(SERVICE_URI_FORMAT % text.to_url)
+
+      @text     = text
+      @location = response['location']
+      @filename = text.to_filename('mp3')
+    end
+
+    def to_mp3
+      download_here @location, @filename
+    end
+
+    def to_s
+      [@text, @location, @filename].join(' -&gt; ')
+    end
+
+    private
+
+    def get_response service_uri
+      Net::HTTP.get_response(URI.parse(service_uri))
+    end
+
+    def download_here url, filename
+      system &quot;curl -o #{filename} #{url}&quot;
+    end
+  end
+
+  module String
+    def to_speech
+      speech = Speech.new(self)
+
+      puts speech
+
+      speech.to_mp3
+    end
+
+    def to_url
+      gsub(' ', '+').safe
+    end
+
+    def to_filename extension = 'bin'
+      [(gsub(' ', '_')).safe, extension].join('.')
+    end
+
+    def safe
+      downcase.strip.gsub(/[^\w-]/, '')
+    end
+  end
+end</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Migrando a Octopress]]></title>
+    <link href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/"/>
+    <updated>2012-11-20T09:13:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2012/11/20/migrando-a-octopress</id>
+    <content type="html"><![CDATA[<h3>Motivación</h3>
+
+<p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
+
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
+
+<!-- more -->
+
+
+<h3><em>Esto es lo que estaba buscando</em></h3>
+
+<p>Su autor define Octopress como <em>&#8220;A blogging framework for hackers&#8221;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
+
+<p>Está basado en el generador de sitios estáticos <a href="https://github.com/mojombo/jekyll">Jekyll</a>, especialmente utilizado para construir blogs y ahora motor de <a href="http://pages.github.com/">GitHub Pages</a>, al que Octopress especializa como plataforma de blogging <em>ready-to-use</em> a través templates en front-end (HTML5, responsive layout, Compass…) y una colección de herramientas con las que generar y gestionar los contenidos.</p>
+
+<p>Una de sus principales características es la de generar un sitio completamente estático (únicamente archivos HTML en una estructura de directorios), a partir de un archivo de reglas y los propios fuentes del contenido.</p>
+
+<p>Ventajas y desventajas:</p>
+
+<ul>
+<li>El servidor se limitará a servir estáticos, lo que será tremendamente
+eficiente.</li>
+<li>Gran comodidad de despliegue:
+
+<ul>
+<li>Los requisitos en servidor son mínimos.</li>
+<li>Puedes deplegarlo de forma gratuita en servicios como <a href="http://octopress.org/docs/deploying/github/">GitHub Pages</a> o <a href="http://octopress.org/docs/deploying/heroku/">Heroku</a>.</li>
+</ul>
+</li>
+<li>Existe un proceso para regenerar todo el site, que puede ser lento si el volumen de posts es grande.</li>
+</ul>
+
+
+<h3>Migración</h3>
+
+<h4>Exportación desde Posterous</h4>
+
+<p>Usando el <a href="https://github.com/pepijndevos/jekyll/blob/patch-1/lib/jekyll/migrators/posterous.rb">script de migración</a> proporcionado por la comunidad de Jekyll el proceso fue sencillo. El script hace uso del <a href="http://posterous.com/api">API de Posterous</a> para, previa autorización vía user/pass + api_token, volcar el contenido de tus posts en archivos HTML y descargar las imágenes asociadas:</p>
+
+<pre><code>$ ruby posterous.rb &lt;username&gt; &lt;password&gt; &lt;api_token&gt;
+</code></pre>
+
+<p>El script realiza la exportación del <em>Site</em> o <em>Space</em> configurado como primario. Para realizar la exportación de cualquier otro <em>Site</em> del que seas propietario será necesario editar la línea <a href="https://github.com/pepijndevos/jekyll/blob/patch-1/lib/jekyll/migrators/posterous.rb#L21">#21</a> especificando su id de esta forma: <code>site = Site.find(&lt;site_id&gt;)</code>.</p>
+
+<p>Para obtener esta información puedes usar la gema <a href="https://github.com/posterous/posterous-gem/">posterous-gem</a> en un script Ruby o ejecutar el cliente interactivo proporcionado en <code>bin/posterous</code>. Esta gema actúa como cliente oficial del API y puedes lanzar acciones como <code>&gt; Site.all.pluck(:id)</code> para obtener los ids de tus <em>Sites</em>.</p>
+
+<h4>Procesado</h4>
+
+<p>Para favorecer la mantenibilidad de los posts anteriores he preferido convertirlos a <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>:</p>
+
+<ol>
+<li>Eliminación de <em>markup</em> HTML y conversión de caracteres aplicando <a href="https://github.com/danguita/blog.davidanguita.name/blob/master/lib/migration-replacements">estos reemplazos</a>.</li>
+<li>Inserción de imágenes a través del plugin <a href="http://octopress.org/docs/plugins/image-tag/">Image Tag</a>.</li>
+<li>Conversión de nombres de archivo (extensión .html a .markdown para que el generador de Jekyll procese los archivos con este formato).</li>
+</ol>
+
+
+<h4>Despliegue en GitHub Pages</h4>
+
+<p>Fue pan comido con las <a href="http://octopress.org/docs/deploying/github/">herramientas</a> proporcionadas:</p>
+
+<p>El script de inicialización <code>setup_github_pages</code> realiza <em>automágicamente</em> los ajustes de despliegue para que la tarea <code>deploy</code> realice su cometido:</p>
+
+<ol>
+<li>Regenerar el sitio.</li>
+<li>Copiar los archivos generados al directorio <code>_deploy</code>.</li>
+<li>Push hacia el repo en GitHub, en mi caso bajo el branch <code>gh-pages</code> al tratarse de una <a href="https://help.github.com/articles/user-organization-and-project-pages"><em>Project Page</em></a>.</li>
+</ol>
+
+
+<h3>Conclusión</h3>
+
+<p>He escrito este post en formato Markdown usando Vim, he usado <code>preview</code> para revisarlo en el layout definitivo y hecho esto está listo para regenerar y desplegar en GitHub. Mola.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
+    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <updated>2010-08-19T00:00:00+02:00</updated>
+    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
+
+<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
+
+<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
+</code></pre>
+
+<!-- more -->
+
+
+<p>Los tipos de archivo que mantengo sincronizados:</p>
+
+<h3>Dotfiles</h3>
+
+<p>Archivos generalmente alojados en el directorio de usuario, cuyos nombres comienzan con un punto y definen variables de entorno, alias, opciones de ejecución y preferencias globales de intérpretes del sistema y otras aplicaciones.</p>
+
+<p>Algunos de ellos:</p>
+
+<ul>
+<li>.bashrc (bash shell)</li>
+<li>.bash_profile (bash shell)</li>
+<li>.vimrc (editor de textos vim)</li>
+<li>.gitconfig (git VCS)</li>
+<li>.gitignore (git VCS)</li>
+<li>.irbrc (Intérprete interactivo Ruby)</li>
+<li>.screenrc (GNU screen)</li>
+<li>.zshrc (zsh shell)</li>
+</ul>
+
+
+<blockquote><h4>Actualización Nov 18th, 2012</h4>
+
+<p>Desde hace meses mantengo un repositorio público de dotfiles en GitHub con una
+doble intención: Compartir mis configuraciones con la comunidad y
+permitir la sincronización entre equipos sin requerir la instalación del
+cliente Dropbox.</p>
+
+<p>Podéis acceder a dicho repo desde
+<a href="https://github.com/danguita/dotfiles">danguita/dotfiles</a>.</p></blockquote>
+
+<h3>Archivos de configuración</h3>
+
+<ul>
+<li>Archivos de preferencias, Bundles y Themes de IDEs y editores de texto</li>
+<li>Sitios FTP</li>
+<li>Medios de acceso a equipos remotos</li>
+<li>Conexiones a Bases de Datos (con y sin túnel SSH)</li>
+</ul>
+
+
+<h3>Scripts de sistema</h3>
+
+<p>Principalmente orientados a automatización de tareas en servidor.</p>
+
+<h3>Documentación</h3>
+
+<ul>
+<li>Referencias sobre frameworks y lenguajes de programación</li>
+<li>Cheat Sheets</li>
+<li>Presentaciones</li>
+<li>Otra bibliografía esencial</li>
+</ul>
+
+
+<h3>Claves y certificados</h3>
+
+<ul>
+<li>Passwords (encriptado)</li>
+<li>Certificados de usuario y seguridad</li>
+</ul>
+
+
+<h3>Enlaces de descarga</h3>
+
+<p>Suelo almacenar enlaces de descarga de mis aplicaciones esenciales en un archivo de texto, para descargarlas en lote en un equipo nuevo.</p>
+
+<p>Con todos estos archivos sincronizados, el enfrentarnos a un equipo nuevo supondrá perder menos horas de productividad, bastará con instalar las aplicaciones y realizar los enlaces simbólicos en el sentido inverso. ¿Cuáles son vuestras técnicas para ganar minutos en este tipo de tareas que, inevitablemente, nos hacen perder tiempo cada vez que renovamos hardware?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cómo gestiono Twitter con HootSuite]]></title>
+    <link href="http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite/"/>
+    <updated>2010-02-13T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite</id>
+    <content type="html"><![CDATA[<p>Hace algún tiempo abandoné clientes de escritorio como TweetDeck o Seesmic Desktop para pasar a utilizar el cliente web HootSuite como herramienta única de gestión de mi cuenta Twitter. El motivo no es otro que ser tan completo como cualquier cliente de escritorio actual y poseer una característica inherente a las aplicaciones web convencionales: Sólo necesito un navegador para utilizarla.
+HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos, pudiendo segmentar tu timeline en dos niveles: Pestañas y columnas.</p>
+
+<p>La naturaleza de ambos niveles es clara: Cada pestaña podrá contener columnas y cada columna mostrará los tweets que satisfacen la condición que aplica. Estas condiciones son las habituales según el API de Twitter (timeline público, menciones, favoritos y DMs), además de Listas y búsquedas almacenadas.</p>
+
+<!-- more -->
+
+
+<p>Este es el interfaz general que ofrece HootSuite, donde identificamos las pestañas en la zona superior izquierda y las columnas en el cuerpo de la página:</p>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/hootsuite-DMs.jpg" title="Hootsuite DM" ></p>
+
+<p>Mi sistema de gestión se basa en cinco pestañas:</p>
+
+<ul>
+<li>Timeline</li>
+<li>DMs</li>
+<li>Searches</li>
+<li>Favs</li>
+<li>Pending</li>
+</ul>
+
+
+<p>La primera de ellas, <em>Timeline</em>, contiene cuatro columnas:</p>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/hootsuite-main.jpg" title="Hootsuite Main" ></p>
+
+<ol>
+<li>Home Feed, que es el Timeline público habitual.</li>
+<li>Una lista privada llamada &#8220;timeline&#8221;, en la que sitúo a aquellos usuarios con los que tengo una comunicación más activa. La observo más frecuentemente que el Timeline público.</li>
+<li>Menciones, no hay mucho que contar aquí.</li>
+<li>Tweets enviados, ya que suelo necesitar un histórico de mis envíos.</li>
+</ol>
+
+
+<p>La segunda, <em>DMs</em>, es más evidente y tiene como objetivo separar visualmente la otra gran vía de comunicación en Twitter, en este caso de carácter privado:</p>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/hootsuite-Timeline.jpg" title="Hootsuite Timeline" ></p>
+
+<ul>
+<li>DM Outbox (Enviados)</li>
+<li>DM Inbox (Recibidos)</li>
+</ul>
+
+
+<p>La siguiente, <em>Searches</em>, está destinada a búsquedas almacenadas. Generalmente busco contenidos interesantes por mi profesión: Desarrollo de software general, desarrollo web, frameworks MVC, frameworks JavaScript y un largo etcétera. Es una fuente importante de usuarios a seguir, ya que generan el contenido relevante para mí.</p>
+
+<p><em>Favs</em> también es evidente, simplemente alberga mi lista de tweets favoritos en una única columna. Suelo usar esta funcionalidad en Twitter para marcar aquellos tweets que referencian contenido interesante y que quiero leer en cuanto tenga tiempo libre. Habitualmente acumulo favoritos durante la semana y suelo procesarlos los fines de semana. Se que no es el uso habitual y que otros clientes ofrecen marcado de tweets sin pasar por favoritos, pero para mí es un medio muy cómodo.</p>
+
+<p>Por último, <em>Pending</em> muestra una única columna de tweets programados y pendientes de envío, otra de las funcionalidades de HootSuite. Realmente la utilizo contadas veces, pero su especial naturaleza me obliga a aislarla del contenido en tiempo real.</p>
+
+<p>Twitter es una fuente inmensa de contenidos y una correcta organización evitará que pasemos por alto tweets y enlaces relevantes y nos ayudará a aislar el &#8220;ruido&#8221; que es pocas veces útil.</p>
+
+<p>Probablemente la gestión de contenido en Twitter es algo muy personal y dependiente de vuestra profesión o intereses, por supuesto indispensable para los llamados Social Media y Community Managers aunque también útil para los meros usuarios como yo.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[La "Cheat Sheet" que todos hemos hecho alguna vez]]></title>
+    <link href="http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
+    <updated>2010-01-07T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
+    <content type="html"><![CDATA[<p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
+
+<p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="http://blog.davidanguita.name/images/vicheat-final.png" title="Vi Cheat Sheet" ></p>
+
+<p>Extraída de esta completa <a href="http://www.gentoo.org/doc/es/vi-guide.xml">guía de uso de Vi</a>.</p>
+
+<p>Completando el post, no podría terminar sin recomendar una genial colección de las citadas Cheat Sheets especialmente bien estructuradas en mi opinión. Sintetizan temas muy interesantes para desarrolladores web como HTML, CSS, PHP y Ruby on Rails: <a href="http://www.addedbytes.com/cheat-sheets/">Added Bytes Cheat Sheets</a>.</p>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/addedbytes-screenshot.jpg" title="Added Bytes" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Línea del tiempo de distribuciones GNU/Linux]]></title>
+    <link href="http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux/"/>
+    <updated>2009-12-29T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux</id>
+    <content type="html"><![CDATA[<p>Desde <a href="http://futurist.se/gldt">http://futurist.se/gldt/</a> se está realizando un gran trabajo creando y manteniendo un mapa de distribuciones GNU/Linux que abarca su evolución, derivaciones y bifurcaciones en el tiempo partiendo de distribuciones &#8220;maestras&#8221; como Debian, Slackware, Red Hat y muchas otras.</p>
+
+<p>A continuación os muestro la última versión hasta el momento (9.3). Es posible que existan actualizaciones en el fichero debido a que ciertas familias de distribuciones están en constante derivación, todo ello está correctamente versionado en http://futurist.se/gldt/.</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="http://blog.davidanguita.name/images/media_httpfuturistseg_wBHIs.png" title="GNULinux" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS extendido con LESS]]></title>
+    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
+    <updated>2009-12-05T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
+    <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
+
+<p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
+
+<ul>
+<li>Variables</li>
+<li>Mixins</li>
+<li>Reglas anidadas</li>
+<li>Operaciones</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Variables</h3>
+
+<p>Permite definir atributos en el documento CSS y asignarlos a múltiples clases, por lo que las modificaciones de estos atributos tienen repercusión de forma global.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#colors</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">header</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">wrapper</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">footer</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A los que accederemos con:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.wrapper</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="m">#colors</span><span class="p">[</span><span class="o">@</span><span class="n">wrapper</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mixins</h3>
+
+<p>Permite asociar todos los atributos de una clase a cualquier otra, permitiendo también el paso de parámetros a la primera, lo que a efectos prácticos la convierte en una función que devuelve una serie de atributos.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.bordered</span><span class="o">(</span><span class="k">@color</span><span class="o">:</span> <span class="nf">#fff</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">border</span><span class="o">:</span> <span class="nt">1px</span> <span class="nt">solid</span> <span class="k">@color</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Reglas anidadas</h3>
+
+<p>Permite definir la jerarquía de clases en el DOM estableciendo unas claras reglas de herencia.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nf">#header</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">wrapper</span> <span class="err">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="m">960px</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Operaciones</h3>
+
+<p>Aporta un dinamismo relativo a la generación de CSS permitiendo aplicar operaciones aritméticas a valores y colores definidos en la hoja de estilo.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.wrapper</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#888</span> <span class="o">/</span> <span class="m">2</span> <span class="o">+</span> <span class="m">#000</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para trabajar con LESS, una vez instalado en nuestro sistema a través de ruby-gems, editaremos un archivo con extensión .less que utilizaremos para generar el CSS estándar de forma automática a través de la gema.</p>
+
+<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de http://github.com/cloudhead/less/tree):</p>
+
+<h4>LESS</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@dark</span><span class="o">:</span> <span class="nf">#110011</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.outline</span> <span class="o">(</span><span class="k">@width</span><span class="o">:</span> <span class="nt">1</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">border</span><span class="o">:</span> <span class="o">(</span><span class="k">@width</span> <span class="o">*</span> <span class="nt">10px</span><span class="o">)</span> <span class="nt">solid</span> <span class="nt">black</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.article</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">a</span> <span class="err">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nt">p</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="o">@</span><span class="n">dark</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nc">.outline</span><span class="o">(</span><span class="nt">3</span><span class="o">);</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>CSS</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.article</span> <span class="nt">a</span> <span class="p">{</span> <span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.article</span> <span class="nt">p</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#110011</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.article</span> <span class="p">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">30px</span> <span class="k">solid</span> <span class="nb">black</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Recordemos que no estamos hablando de CSS dinámico, sino de una especificación extendida del CSS estático que conocemos. Las técnicas de CSS dinámico requieren generalmente un servidor o intérprete y tienen objetivos adicionales a flexibilizar el proceso de desarrollo.</p>
+
+<p>LESS es open source bajo Licencia Apache y mantiene un repositorio público en github desde <a href="http://github.com/cloudhead/less">este proyecto</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Resaltado de sintaxis en Aptana Studio]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/"/>
+    <updated>2009-11-27T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio</id>
+    <content type="html"><![CDATA[<p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
+
+<p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
+
+<!-- more -->
+
+
+<h4><a href="http://gueschla.com/labs/green-chaud/">Green Chaud</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/greenchaud.jpg" title="Green Chaud" ></p>
+
+<h4><a href="http://thirdroute.com/autumna-a-style-for-aptana-ide/">Autumna – A style for Aptana IDE</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/autumna.jpg" title="Autumna" ></p>
+
+<h4><a href="http://www.nightlion.net/themes/2009/aptana-dark-color-theme/">Aptana Studio IDE Dark Color Theme</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/dark_color_theme.jpg" title="Dark Color Theme" ></p>
+
+<h4><a href="http://forums.aptana.com/viewtopic.php?f=20&amp;t=2214">Dark (TextMate like) syntax colouring</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/dark_textmate.jpg" title="Dark Textmate" ></p>
+
+<h4><a href="http://www.johnrockefeller.net/aptana-color-themes/">Dark Red &amp; Dark Blue Aptana Color Themes</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/darkblue.jpg" title="Dark Blue" ></p>
+
+<h3>Instrucciones de importación de estilos en los Editores</h3>
+
+<p><em>Aptana gestiona distintos Editores para los diferentes lenguajes:</em></p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana (variable según el sistema operativo)</li>
+<li>Abrimos el árbol de preferencias: Aptana &rarr; Editors &rarr; (Lenguaje) &rarr; Colors</li>
+<li>Importamos el fichero de estilo a través del botón <em>Import</em></li>
+</ol>
+
+
+<p>Otra opción muy cómoda sería:</p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana</li>
+<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto &#8220;color&#8221; para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
+</ol>
+
+
+<p>Enlace de interés (sobre la importación de estilos): <a href="http://www.johnrockefeller.net/how-to-install-an-aptana-color-theme/">How To Install An Aptana Color Theme</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Distribución del Runtime Adobe AIR]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/"/>
+    <updated>2009-11-26T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air</id>
+    <content type="html"><![CDATA[<p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
+
+<p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
+
+<!-- more -->
+
+
+<h3>Distribución web</h3>
+
+<p>A través de esta opción no es necesario firmar ninguna Licencia de Distribución siempre y cuando empleemos el medio de distribución web de aplicaciones Adobe AIR proporcionado por Adobe y conocido como Badge Install. Se trata de un pequeño script web (JavaScript y Flash) que tras una sencilla configuración permite descargar e instalar el Runtime desde los propios servidores de Adobe y nuestra aplicación (desde el servidor que decidamos, las condiciones de distribución afectan únicamente al Runtime) en un único proceso de instalación.</p>
+
+<h3>Distribución en soportes físicos (CD/DVD)</h3>
+
+<p>En este caso debemos solicitar una Licencia de distribución a Adobe a través del un formulario en el que debemos aportar cierta información sobre el proyecto para el que solicitamos la licencia.Una vez Adobe haya estudiado y aprobado nuestra solicitud de licencia (puede tardar unos 3 días laborables), se nos aportará una completa documentación sobre las formas de distribución del Runtime junto a nuestras aplicaciones.</p>
+
+<p>Las posibilidades se reducen a la instalación del Runtime junto a nuestra aplicación (un único proceso de instalación &#8220;invisible&#8221; al usuario) o instalación del Runtime standalone seguido de nuestra aplicación (orientado principalmente a equipos IT que realicen la instalación de forma silenciosa a través de la intranet de su empresa).</p>
+
+<p>Comentar también que la concesión de Licencia de distribución por parte de Adobe no nos da libertad total en cuanto al Runtime, por ejemplo no se permite su distribución con modificaciones por nuestra parte. Este es un extracto de la Descripción general de licencia aportada por Adobe referente a las condiciones que debemos cumplir al aceptar la licencia:</p>
+
+<blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
+El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección license-air@adobe.com para obtener más información.
+El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
+El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
+Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &#8220;Includes Adobe AIR&#8221; (&#8220;Incluye Adobe AIR&#8221;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
+El receptor de la licencia no podrá distribuir el instalador o los archivos del instalador de Adobe AIR con el fin de evitar la instalación del tiempo de ejecución de Adobe AIR, una aplicación de Adobe AIR o el EULA.
+El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecución de Adobe AIR, sus bibliotecas, componentes o archivos del instalador de un modo no documentado. Consulte las preguntas frecuentes para obtener información más detallada.</p></blockquote>
+
+<p>El número de aplicaciones desarrolladas con esta tecnología crece día a día (probablemente todos nosotros tenemos alguna aplicación AIR instalada en nuestro sistema o incluso la utilizamos habitualmente –los tuiteros lo sabrán bien por clientes como TweetDeck–) y aparentemente el medio de distribución más utilizado es el web, lo que nos aleja de la citada maraña de condiciones de distribución, aunque es muy útil conocerlas cuando, como es mi caso, realizamos una distribución a través de soportes físicos.</p>
+
+<h4>Enlaces de interés:</h4>
+
+<ul>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution1.html">Distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution_faq.html">Preguntas frecuentes sobre la distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/devnet/air/articles/air_badge_install.html">Deploying Adobe AIR applications seamlessly with badge install (Inglés)</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacPorts, imprescindible para el switcher desde GNU/Linux]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux/"/>
+    <updated>2009-11-08T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux</id>
+    <content type="html"><![CDATA[<p>Siempre que en la comunidad Mac nos referimos a switcher, todo nos lleva a pensar que se trata de un usuario que abandona el tedioso Microsoft Windows para pasar a Mac OS X, aunque no es menos habitual que un switcher proceda de otros Sistemas Operativos como GNU/Linux. Este fue mi caso concreto, aunque no puedo considerarme switcher ya que nunca abandoné mi sistema original, los compagino muy a menudo aunque es cierto que el sistema en el que trabajo más horas diarias es OS X.</p>
+
+<p>Los usuarios de GNU/Linux en prácticamente cualquiera de sus distribuciones estarán habituados al concepto de sistema de gestión de paquetes (como es APT en distribuciones Debian/Ubuntu), algo de lo que no podemos disfrutar nativamente en nuestros OS X y que nos abstraería de arduas instalaciones de software desde los fuentes.</p>
+
+<p>Ante esta dificultad para instalar software libre/opensource en sistemas Darwin (base de Mac OS X) surge MacPorts (originalmente conocido como DarwinPorts), que integra un completo repositorio de paquetes portados a Darwin que pueden ser gestionados a través de órdenes sencillas como éstas:</p>
+
+<!-- more -->
+
+
+<h4>Búsqueda</h4>
+
+<pre><code>$ port search &lt;nombre_del_paquete&gt;
+</code></pre>
+
+<h4>Instalación</h4>
+
+<pre><code>$ port install &lt;nombre_del_paquete&gt;
+</code></pre>
+
+<h4>Actualización</h4>
+
+<pre><code>$ port upgrade &lt;nombre_del_paquete&gt;
+</code></pre>
+
+<p>En la web oficial de MacPorts podemos encontrar completa información para la instalación del sistema de gestión de paquetes en las diferentes versiones de OS X. Cumpliendo los requisitos mínimos (tener instalado Xcode Developer Tools y X11) el proceso es automático.</p>
+
+<p>Disfrutad de los más de 6300 ports disponibles a día de hoy.</p>
+
+<p><a href="http://www.macports.org/">Web oficial de MacPorts</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Repositorios de Snippets para todos]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos/"/>
+    <updated>2009-11-07T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos</id>
+    <content type="html"><![CDATA[<p>Un buen medio de formación, inspiración o resolución de problemas de todo desarrollador de software siempre ha sido el código de ejemplo junto al API o manual de turno, es por ello que me gustaría recomendar algunos sitios web que recopilan Snippets o fragmentos de código con un propósito específico, modulares y por tanto reutilizables, escritos prácticamente en cualquier lenguaje. Algunos repositorios van más allá albergando scripts de sistema, ficheros de configuración de servicios, recomendaciones para el uso de editores de texto y un largo etcétera.
+La mayoría de estos sitios web incluyen completas posibilidades colaborativas, permitiendo así que cualquier usuario registrado pueda comentar y proponer alternativas o correcciones al contenido (en forma de Snippet) publicado por otro usuario.</p>
+
+<!-- more -->
+
+
+<p>Detallando el concepto de Snippet, las virtudes de este término de difícil traducción son:</p>
+
+<h3>Formación</h3>
+
+<p>Muchos de estos fragmentos de código pueden estar más optimizados que el nuestro, lo que nos ayudará a mejorar como desarrolladores.</p>
+
+<h3>Inspiración</h3>
+
+<p>Soy partidario de &#8220;curiosear&#8221; en estos enormes repositorios para captar ideas, metodologías o simplemente buenas prácticas a la hora de desarrollar software en uno u otro lenguaje.</p>
+
+<h3>Resolución de problemas</h3>
+
+<p>Una simple búsqueda en el repositorio puede generar múltiples resoluciones o alternativas a un planteamiento que nos está creando dificultades en el desarrollo.</p>
+
+<h3>Integración con IDEs y editores de texto potentes</h3>
+
+<p>Los IDEs y editores de texto más potentes permiten integrar estos fragmentos de código para insertarlos muy cómodamente en nuestro código. Como ya dije, el propósito de un Snippet debe ser específico, de esta forma podemos tener nuestra librería de funciones siempre disponible.</p>
+
+<p>Éstos son los Repositorios de Snippets que alguna vez he utilizado y me han sido útiles:</p>
+
+<h4><a href="http://snipt.net/">Snipt</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/snipt.jpg" title="Snipt" ></p>
+
+<h4><a href="http://www.smipple.net/">Smipple</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/smipple.jpg" title="Smipple" ></p>
+
+<h4><a href="http://snipplr.com/">Snipplr</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/snipplr.jpg" title="Snipplr" ></p>
+
+<h4><a href="http://codesnippets.joyent.com/">CodeSnippets</a></h4>
+
+<p><img class="center" src="http://blog.davidanguita.name/images/codesnippets.jpg" title="CodeSnippets" ></p>
+
+<p>Para finalizar el artículo, es cierto que hay otros muchos servicios similares principalmente orientados a la Resolución de problemas, por lo que la aportación de un usuario se reduce a Preguntas y Respuestas. Son servicios con alguna relación con los que hemos mencionado, aunque no con el mismo propósito.</p>
+
+<p>StackOverflow y Server Fault son algunos de estos útiles servicios de asistencia colaborativa.</p>
+]]></content>
+  </entry>
+  
+</feed>

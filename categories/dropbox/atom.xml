@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Dropbox | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/dropbox/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
+    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <updated>2010-08-19T00:00:00+02:00</updated>
+    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
+
+<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
+
+<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
+</code></pre>
+
+<!-- more -->
+
+
+<p>Los tipos de archivo que mantengo sincronizados:</p>
+
+<h3>Dotfiles</h3>
+
+<p>Archivos generalmente alojados en el directorio de usuario, cuyos nombres comienzan con un punto y definen variables de entorno, alias, opciones de ejecución y preferencias globales de intérpretes del sistema y otras aplicaciones.</p>
+
+<p>Algunos de ellos:</p>
+
+<ul>
+<li>.bashrc (bash shell)</li>
+<li>.bash_profile (bash shell)</li>
+<li>.vimrc (editor de textos vim)</li>
+<li>.gitconfig (git VCS)</li>
+<li>.gitignore (git VCS)</li>
+<li>.irbrc (Intérprete interactivo Ruby)</li>
+<li>.screenrc (GNU screen)</li>
+<li>.zshrc (zsh shell)</li>
+</ul>
+
+
+<blockquote><h4>Actualización Nov 18th, 2012</h4>
+
+<p>Desde hace meses mantengo un repositorio público de dotfiles en GitHub con una
+doble intención: Compartir mis configuraciones con la comunidad y
+permitir la sincronización entre equipos sin requerir la instalación del
+cliente Dropbox.</p>
+
+<p>Podéis acceder a dicho repo desde
+<a href="https://github.com/danguita/dotfiles">danguita/dotfiles</a>.</p></blockquote>
+
+<h3>Archivos de configuración</h3>
+
+<ul>
+<li>Archivos de preferencias, Bundles y Themes de IDEs y editores de texto</li>
+<li>Sitios FTP</li>
+<li>Medios de acceso a equipos remotos</li>
+<li>Conexiones a Bases de Datos (con y sin túnel SSH)</li>
+</ul>
+
+
+<h3>Scripts de sistema</h3>
+
+<p>Principalmente orientados a automatización de tareas en servidor.</p>
+
+<h3>Documentación</h3>
+
+<ul>
+<li>Referencias sobre frameworks y lenguajes de programación</li>
+<li>Cheat Sheets</li>
+<li>Presentaciones</li>
+<li>Otra bibliografía esencial</li>
+</ul>
+
+
+<h3>Claves y certificados</h3>
+
+<ul>
+<li>Passwords (encriptado)</li>
+<li>Certificados de usuario y seguridad</li>
+</ul>
+
+
+<h3>Enlaces de descarga</h3>
+
+<p>Suelo almacenar enlaces de descarga de mis aplicaciones esenciales en un archivo de texto, para descargarlas en lote en un equipo nuevo.</p>
+
+<p>Con todos estos archivos sincronizados, el enfrentarnos a un equipo nuevo supondrá perder menos horas de productividad, bastará con instalar las aplicaciones y realizar los enlaces simbólicos en el sentido inverso. ¿Cuáles son vuestras técnicas para ganar minutos en este tipo de tareas que, inevitablemente, nos hacen perder tiempo cada vez que renovamos hardware?</p>
+]]></content>
+  </entry>
+  
+</feed>

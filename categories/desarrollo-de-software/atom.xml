@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Desarrollo de software | I solve problems]]></title>
+  <link href="http://blog.davidanguita.name/categories/desarrollo-de-software/atom.xml" rel="self"/>
+  <link href="http://blog.davidanguita.name/"/>
+  <updated>2013-11-01T11:57:16+01:00</updated>
+  <id>http://blog.davidanguita.name/</id>
+  <author>
+    <name><![CDATA[David Anguita]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
+    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <updated>2010-08-19T00:00:00+02:00</updated>
+    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
+
+<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
+
+<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
+</code></pre>
+
+<!-- more -->
+
+
+<p>Los tipos de archivo que mantengo sincronizados:</p>
+
+<h3>Dotfiles</h3>
+
+<p>Archivos generalmente alojados en el directorio de usuario, cuyos nombres comienzan con un punto y definen variables de entorno, alias, opciones de ejecución y preferencias globales de intérpretes del sistema y otras aplicaciones.</p>
+
+<p>Algunos de ellos:</p>
+
+<ul>
+<li>.bashrc (bash shell)</li>
+<li>.bash_profile (bash shell)</li>
+<li>.vimrc (editor de textos vim)</li>
+<li>.gitconfig (git VCS)</li>
+<li>.gitignore (git VCS)</li>
+<li>.irbrc (Intérprete interactivo Ruby)</li>
+<li>.screenrc (GNU screen)</li>
+<li>.zshrc (zsh shell)</li>
+</ul>
+
+
+<blockquote><h4>Actualización Nov 18th, 2012</h4>
+
+<p>Desde hace meses mantengo un repositorio público de dotfiles en GitHub con una
+doble intención: Compartir mis configuraciones con la comunidad y
+permitir la sincronización entre equipos sin requerir la instalación del
+cliente Dropbox.</p>
+
+<p>Podéis acceder a dicho repo desde
+<a href="https://github.com/danguita/dotfiles">danguita/dotfiles</a>.</p></blockquote>
+
+<h3>Archivos de configuración</h3>
+
+<ul>
+<li>Archivos de preferencias, Bundles y Themes de IDEs y editores de texto</li>
+<li>Sitios FTP</li>
+<li>Medios de acceso a equipos remotos</li>
+<li>Conexiones a Bases de Datos (con y sin túnel SSH)</li>
+</ul>
+
+
+<h3>Scripts de sistema</h3>
+
+<p>Principalmente orientados a automatización de tareas en servidor.</p>
+
+<h3>Documentación</h3>
+
+<ul>
+<li>Referencias sobre frameworks y lenguajes de programación</li>
+<li>Cheat Sheets</li>
+<li>Presentaciones</li>
+<li>Otra bibliografía esencial</li>
+</ul>
+
+
+<h3>Claves y certificados</h3>
+
+<ul>
+<li>Passwords (encriptado)</li>
+<li>Certificados de usuario y seguridad</li>
+</ul>
+
+
+<h3>Enlaces de descarga</h3>
+
+<p>Suelo almacenar enlaces de descarga de mis aplicaciones esenciales en un archivo de texto, para descargarlas en lote en un equipo nuevo.</p>
+
+<p>Con todos estos archivos sincronizados, el enfrentarnos a un equipo nuevo supondrá perder menos horas de productividad, bastará con instalar las aplicaciones y realizar los enlaces simbólicos en el sentido inverso. ¿Cuáles son vuestras técnicas para ganar minutos en este tipo de tareas que, inevitablemente, nos hacen perder tiempo cada vez que renovamos hardware?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[La "Cheat Sheet" que todos hemos hecho alguna vez]]></title>
+    <link href="http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
+    <updated>2010-01-07T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
+    <content type="html"><![CDATA[<p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
+
+<p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="/images/vicheat-final.png" title="Vi Cheat Sheet" ></p>
+
+<p>Extraída de esta completa <a href="http://www.gentoo.org/doc/es/vi-guide.xml">guía de uso de Vi</a>.</p>
+
+<p>Completando el post, no podría terminar sin recomendar una genial colección de las citadas Cheat Sheets especialmente bien estructuradas en mi opinión. Sintetizan temas muy interesantes para desarrolladores web como HTML, CSS, PHP y Ruby on Rails: <a href="http://www.addedbytes.com/cheat-sheets/">Added Bytes Cheat Sheets</a>.</p>
+
+<p><img class="center" src="/images/addedbytes-screenshot.jpg" title="Added Bytes" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSS extendido con LESS]]></title>
+    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
+    <updated>2009-12-05T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
+    <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
+
+<p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
+
+<ul>
+<li>Variables</li>
+<li>Mixins</li>
+<li>Reglas anidadas</li>
+<li>Operaciones</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h3>Variables</h3>
+
+<p>Permite definir atributos en el documento CSS y asignarlos a múltiples clases, por lo que las modificaciones de estos atributos tienen repercusión de forma global.</p>
+
+<p>``` css</p>
+
+<h1>colors {</h1>
+
+<p>  header: #fff;
+  wrapper: #000;
+  footer: blue;
+}
+```</p>
+
+<p>A los que accederemos con:</p>
+
+<p><code>css
+.wrapper {
+  color: #colors[@wrapper];
+}
+</code></p>
+
+<h3>Mixins</h3>
+
+<p>Permite asociar todos los atributos de una clase a cualquier otra, permitiendo también el paso de parámetros a la primera, lo que a efectos prácticos la convierte en una función que devuelve una serie de atributos.</p>
+
+<p><code>css
+.bordered(@color: #fff) {
+  border: 1px solid @color;
+}
+</code></p>
+
+<h3>Reglas anidadas</h3>
+
+<p>Permite definir la jerarquía de clases en el DOM estableciendo unas claras reglas de herencia.</p>
+
+<p>``` css</p>
+
+<h1>header {</h1>
+
+<p>  background-color: #000;
+  .wrapper {</p>
+
+<pre><code>width: 960px;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>Operaciones</h3>
+
+<p>Aporta un dinamismo relativo a la generación de CSS permitiendo aplicar operaciones aritméticas a valores y colores definidos en la hoja de estilo.</p>
+
+<p><code>css
+.wrapper {
+  background-color: #888 / 2 + #000;
+}
+</code></p>
+
+<p>Para trabajar con LESS, una vez instalado en nuestro sistema a través de ruby-gems, editaremos un archivo con extensión .less que utilizaremos para generar el CSS estándar de forma automática a través de la gema.</p>
+
+<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de http://github.com/cloudhead/less/tree):</p>
+
+<h4>LESS</h4>
+
+<p>``` css
+@dark: #110011;</p>
+
+<p>.outline (@width: 1) {
+  border: (@width * 10px) solid black;
+}</p>
+
+<p>.article {
+  a { text-decoration: none }
+  p { color: @dark }
+  .outline(3);
+}
+```</p>
+
+<h4>CSS</h4>
+
+<p>``` css
+.article a { text-decoration: none }</p>
+
+<p>.article p { color: #110011 }</p>
+
+<p>.article { border: 30px solid black }
+```</p>
+
+<p>Recordemos que no estamos hablando de CSS dinámico, sino de una especificación extendida del CSS estático que conocemos. Las técnicas de CSS dinámico requieren generalmente un servidor o intérprete y tienen objetivos adicionales a flexibilizar el proceso de desarrollo.</p>
+
+<p>LESS es open source bajo Licencia Apache y mantiene un repositorio público en github desde <a href="http://github.com/cloudhead/less">este proyecto</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Resaltado de sintaxis en Aptana Studio]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/"/>
+    <updated>2009-11-27T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio</id>
+    <content type="html"><![CDATA[<p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
+
+<p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
+
+<!-- more -->
+
+
+<h4><a href="http://gueschla.com/labs/green-chaud/">Green Chaud</a></h4>
+
+<p><img class="center" src="/images/greenchaud.jpg" title="Green Chaud" ></p>
+
+<h4><a href="http://thirdroute.com/autumna-a-style-for-aptana-ide/">Autumna – A style for Aptana IDE</a></h4>
+
+<p><img class="center" src="/images/autumna.jpg" title="Autumna" ></p>
+
+<h4><a href="http://www.nightlion.net/themes/2009/aptana-dark-color-theme/">Aptana Studio IDE Dark Color Theme</a></h4>
+
+<p><img class="center" src="/images/dark_color_theme.jpg" title="Dark Color Theme" ></p>
+
+<h4><a href="http://forums.aptana.com/viewtopic.php?f=20&amp;t=2214">Dark (TextMate like) syntax colouring</a></h4>
+
+<p><img class="center" src="/images/dark_textmate.jpg" title="Dark Textmate" ></p>
+
+<h4><a href="http://www.johnrockefeller.net/aptana-color-themes/">Dark Red &amp; Dark Blue Aptana Color Themes</a></h4>
+
+<p><img class="center" src="/images/darkblue.jpg" title="Dark Blue" ></p>
+
+<h3>Instrucciones de importación de estilos en los Editores</h3>
+
+<p><em>Aptana gestiona distintos Editores para los diferentes lenguajes:</em></p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana (variable según el sistema operativo)</li>
+<li>Abrimos el árbol de preferencias: Aptana &rarr; Editors &rarr; (Lenguaje) &rarr; Colors</li>
+<li>Importamos el fichero de estilo a través del botón <em>Import</em></li>
+</ol>
+
+
+<p>Otra opción muy cómoda sería:</p>
+
+<ol>
+<li>Abrimos las Preferencias de Aptana</li>
+<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto "color" para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
+</ol>
+
+
+<p>Enlace de interés (sobre la importación de estilos): <a href="http://www.johnrockefeller.net/how-to-install-an-aptana-color-theme/">How To Install An Aptana Color Theme</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Distribución del Runtime Adobe AIR]]></title>
+    <link href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/"/>
+    <updated>2009-11-26T00:00:00+01:00</updated>
+    <id>http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air</id>
+    <content type="html"><![CDATA[<p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
+
+<p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
+
+<!-- more -->
+
+
+<h3>Distribución web</h3>
+
+<p>A través de esta opción no es necesario firmar ninguna Licencia de Distribución siempre y cuando empleemos el medio de distribución web de aplicaciones Adobe AIR proporcionado por Adobe y conocido como Badge Install. Se trata de un pequeño script web (JavaScript y Flash) que tras una sencilla configuración permite descargar e instalar el Runtime desde los propios servidores de Adobe y nuestra aplicación (desde el servidor que decidamos, las condiciones de distribución afectan únicamente al Runtime) en un único proceso de instalación.</p>
+
+<h3>Distribución en soportes físicos (CD/DVD)</h3>
+
+<p>En este caso debemos solicitar una Licencia de distribución a Adobe a través del un formulario en el que debemos aportar cierta información sobre el proyecto para el que solicitamos la licencia.Una vez Adobe haya estudiado y aprobado nuestra solicitud de licencia (puede tardar unos 3 días laborables), se nos aportará una completa documentación sobre las formas de distribución del Runtime junto a nuestras aplicaciones.</p>
+
+<p>Las posibilidades se reducen a la instalación del Runtime junto a nuestra aplicación (un único proceso de instalación "invisible" al usuario) o instalación del Runtime standalone seguido de nuestra aplicación (orientado principalmente a equipos IT que realicen la instalación de forma silenciosa a través de la intranet de su empresa).</p>
+
+<p>Comentar también que la concesión de Licencia de distribución por parte de Adobe no nos da libertad total en cuanto al Runtime, por ejemplo no se permite su distribución con modificaciones por nuestra parte. Este es un extracto de la Descripción general de licencia aportada por Adobe referente a las condiciones que debemos cumplir al aceptar la licencia:</p>
+
+<blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
+El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección license-air@adobe.com para obtener más información.
+El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
+El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
+Los receptores de la licencia, si lo desean, podrán mostrar los logotipos "Includes Adobe AIR" ("Incluye Adobe AIR") en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
+El receptor de la licencia no podrá distribuir el instalador o los archivos del instalador de Adobe AIR con el fin de evitar la instalación del tiempo de ejecución de Adobe AIR, una aplicación de Adobe AIR o el EULA.
+El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecución de Adobe AIR, sus bibliotecas, componentes o archivos del instalador de un modo no documentado. Consulte las preguntas frecuentes para obtener información más detallada.</p></blockquote>
+
+<p>El número de aplicaciones desarrolladas con esta tecnología crece día a día (probablemente todos nosotros tenemos alguna aplicación AIR instalada en nuestro sistema o incluso la utilizamos habitualmente –los tuiteros lo sabrán bien por clientes como TweetDeck–) y aparentemente el medio de distribución más utilizado es el web, lo que nos aleja de la citada maraña de condiciones de distribución, aunque es muy útil conocerlas cuando, como es mi caso, realizamos una distribución a través de soportes físicos.</p>
+
+<h4>Enlaces de interés:</h4>
+
+<ul>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution1.html">Distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution_faq.html">Preguntas frecuentes sobre la distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/devnet/air/articles/air_badge_install.html">Deploying Adobe AIR applications seamlessly with badge install (Inglés)</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

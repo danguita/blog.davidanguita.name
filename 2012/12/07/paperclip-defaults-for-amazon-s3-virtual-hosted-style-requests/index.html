@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>I solve problems - David Anguita</title>
+  <title>Paperclip defaults for Amazon S3 virtual hosted-style requests - I solve problems - David Anguita</title>
   <meta name="author" content="David Anguita">
 
   
-  <meta name="description" content="Redmine is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
+  <meta name="description" content="Paperclip is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/">
+  <link rel="canonical" href="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,61 +77,12 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Setting up a cheap Redmine server using Unicorn and Apache</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-03T17:04:00+01:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
-
-<p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
-Redmine instance within our private domain.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Paperclip defaults for Amazon S3 virtual hosted-style requests</a></h1>
+      <h1 class="entry-title">Paperclip defaults for Amazon S3 virtual hosted-style requests</h1>
     
     
       <p class="meta">
@@ -155,7 +105,7 @@ Redmine instance within our private domain.</p>
   </header>
 
 
-  <div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+<div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
 
 <p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
 
@@ -180,134 +130,62 @@ Redmine instance within our private domain.</p>
 
 
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/">Continue reading &rarr;</a>
-    </footer>
-  
+<!-- more -->
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/23/text-to-speech-through-tts-api-com/">Text.to_speech through tts-api.com</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>Otherwise, if you need to use virtual hosted-style requests like <code>http://yourbucket.s3.amazonaws.com</code>, you <strong>must</strong> specify the <code>path</code> and <code>url</code> options:</p>
+
+<figure class='code'><figcaption><span>config/environments/production.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">paperclip_defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:storage</span> <span class="o">=&gt;</span> <span class="ss">:s3</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="s2">&quot;:s3_domain_url&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;:class/:id.:style.:extension&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:s3_credentials</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:bucket</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_BUCKET&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:access_key_id</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:secret_access_key</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T09:09:00+01:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
+<h3>Important notes</h3>
 
 <ul>
-<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
+<li>For now (<code>3.3.1</code>) you will get a <code>Paperclip::InfiniteInterpolationError</code> exception if the <code>path</code> option is not specified.</li>
+<li>The value of the <code>url</code> option must be <code>":s3_domain_url"</code> as a string, not as a symbol.</li>
+<li>The <code>path</code> option is fully customizable. The shown pattern will produce filepaths like <code>http://yourbucket.s3.amazonaws.com/images/1.thumb.png</code>.</li>
 </ul>
 
 
-<h4>Usage</h4>
+<h3>References</h3>
 
-<div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-
-require_relative 'tts'
-
-class String
-  include TTS::String
-end
-
-&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
-
-
-
+<ul>
+<li><a href="https://github.com/thoughtbot/paperclip#readme">Paperclip on GitHub</a></li>
+<li><a href="http://rubydoc.info/gems/paperclip/Paperclip/Storage/S3">Paperclip::Storage::S3 documentation</a></li>
+<li><a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/LocationSelection.html">AWS Buckets and Regions</a></li>
+</ul>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/23/text-to-speech-through-tts-api-com/">Continue reading &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/20/migrando-a-octopress/">Migrando a Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">David Anguita</span></span>
 
-<time datetime="2012-11-20T09:13:00+01:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Motivación</h3>
-
-<p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
-
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/20/migrando-a-octopress/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Dropbox para sincronizar tus equipos de trabajo</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -319,44 +197,53 @@ end
   
 
 
-<time datetime="2010-08-19T00:00:00+02:00" pubdate data-updated="true">Aug 19<span>th</span>, 2010</time>
-        
-      </p>
+<time datetime="2012-12-07T17:47:00+01:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/aws/'>AWS</a>, <a class='category' href='/categories/amazon/'>Amazon</a>, <a class='category' href='/categories/paperclip/'>Paperclip</a>, <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/s3/'>S3</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/23/text-to-speech-through-tts-api-com/" title="Previous Post: Text.to_speech through tts-api.com">&laquo; Text.to_speech through tts-api.com</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/" title="Next Post: Setting up a cheap Redmine server using Unicorn and Apache">Setting up a cheap Redmine server using Unicorn and Apache &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
-
-<p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
-
-<pre><code>$ ln -s /ruta/del/directorio/dropbox/archivo /ruta/del/archivo
-</code></pre>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/">Continue reading &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
-  <h1>Hi, I&#8217;m David</h1>
-  <p>I&#8217;m a freelance software developer &amp; consultant specialized in Ruby on Rails.</p>
+  <h1>Hi, I'm David</h1>
+  <p>I'm a freelance software developer &amp; consultant specialized in Ruby on Rails.</p>
   <p><img src="http://www.gravatar.com/avatar/cd2e3ba306d19910a2900955667317ee?s=160" alt="david@davidanguita.name at Gravatar" /></p>
   <p>Take a look to my <a href="http://davidanguita.name">personal website</a>, send me <a href="mailto:david@davidanguita.name">an email</a> or follow me <a href="http://twitter.com/danguita">on Twitter</a>.</p>
 </section>
@@ -390,7 +277,7 @@ end
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -407,7 +294,7 @@ end
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/danguita">@danguita</a> on GitHub
@@ -456,6 +343,7 @@ end
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -471,7 +359,10 @@ end
       var disqus_shortname = 'isolveproblems';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/';
+        var disqus_url = 'http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
