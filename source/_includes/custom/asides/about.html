@@ -1,6 +1,12 @@
 <section>
-  <h1>Hi, I'm David</h1>
-  <p>I'm a freelance software developer &amp; consultant specialized in Ruby on Rails.</p>
-  <p><img src="http://www.gravatar.com/avatar/cd2e3ba306d19910a2900955667317ee?s=160" alt="david@davidanguita.name at Gravatar" /></p>
-  <p>Take a look to my <a href="http://davidanguita.name">personal website</a>, send me <a href="mailto:david@davidanguita.name">an email</a> or follow me <a href="http://twitter.com/danguita">on Twitter</a>.</p>
+  {% if site.subtitle %}
+    <h2>{{ site.subtitle }}</h2>
+  {% endif %}
+
+  <p>
+    Hi, I'm a freelance software developer &amp; consultant specialized in Ruby on Rails.
+  </p>
+  <p>
+    Take a look to my <a href="http://davidanguita.name">personal website</a>, send me <a href="mailto:david@davidanguita.name">an email</a> or follow me <a href="http://twitter.com/danguita">on Twitter</a>.
+  </p>
 </section>

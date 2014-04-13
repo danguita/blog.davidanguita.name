@@ -1,8 +1,8 @@
+{% if site.gravatar_header %}
+  <img src="{% gravatar_image 200 %}" alt="Gravatar of {{ site.author }} " title="Gravatar of {{ site.author }}" class="profilepic" />
+{% endif %}
+
 <hgroup>
-  <h1>
-    <a href="{{ root_url }}/">{{ site.title }}</a>
-    {% if site.subtitle %}
-      <small class="subtitle">by {{ site.subtitle }}</small>
-    {% endif %}
-  </h1>
+  <h1><a href="{{ root_url }}/">{{ site.title }}</a></h1>
+  {% include custom/asides/about.html %}
 </hgroup>
