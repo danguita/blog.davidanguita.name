@@ -4,7 +4,7 @@
   <title><![CDATA[I solve problems]]></title>
   <link href="http://blog.davidanguita.name/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2013-11-03T18:56:31+01:00</updated>
+  <updated>2014-04-13T12:22:28+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -19,10 +19,10 @@
     <updated>2013-03-03T17:04:00+01:00</updated>
     <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
     <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
+It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 
 <p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
+documenting processes. It&rsquo;s an everyday tool so we need to have an always ready
 Redmine instance within our private domain.</p>
 
 <!-- more -->
@@ -42,7 +42,7 @@ some lightweight processes with low I/O load.</p>
 
 <h4>Add your service user</h4>
 
-<p>We&#8217;re so bad choosing funny names so our service username is <code>service</code>.</p>
+<p>We&rsquo;re so bad choosing funny names so our service username is <code>service</code>.</p>
 
 <h3>Redmine</h3>
 
@@ -53,7 +53,7 @@ $ git clone git://github.com/redmine/redmine.git ~/apps/redmine
 </code></pre>
 
 <p>Install and set up your database engine server (MySQL, PostgreSQL…) and edit the
-<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&#8217;ll
+<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&rsquo;ll
 be ready to set up the production environment:</p>
 
 <pre><code>$ cd ~/apps/redmine
@@ -63,7 +63,7 @@ $ RAILS_ENV=production bundle exec rake db:migrate
 
 <h3>Unicorn</h3>
 
-<h4>&#8220;unicorn&#8221; gem</h4>
+<h4>&ldquo;unicorn&rdquo; gem</h4>
 
 <p>Add the <code>unicorn</code> gem as an application dependency by adding a
 <code>Gemfile.local</code> file (unobtrusive way to add dependencies)
@@ -125,7 +125,7 @@ lines:</p>
 </ul>
 
 
-<h4>&#8220;Automate everything&#8221;</h4>
+<h4>&ldquo;Automate everything&rdquo;</h4>
 
 <p>We put all service-related scripts in the <code>~/script</code> directory.
 These commands might help you on launching and stopping Unicorn
@@ -187,14 +187,14 @@ a proxy will be listening for processes on the specified host and port.</p>
 and Redmine application should start and be served through the new
 VirtualHost.</p>
 
-<p>Now it&#8217;s time to do some tests in order to adjust the number of Unicorn workers
+<p>Now it&rsquo;s time to do some tests in order to adjust the number of Unicorn workers
 you need to have running on your server.</p>
 
 <h2>Bonus: Setting up Nginx as a frontend of Unicorn</h2>
 
 <p>As some of you <a href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303">have</a>
 <a href="http://twitter.com/mayoral">mentioned</a>, Nginx is generally a better choice
-for micro instances. It consumes much less RAM and it&#8217;s faster than
+for micro instances. It consumes much less RAM and it&rsquo;s faster than
 Apache due its event-driven approach.</p>
 
 <p>Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
@@ -204,7 +204,7 @@ too so there we go:</p>
 <code>unicorn.conf.rb</code> (<code>listen</code> option), so your socket can be located in a path
 like this one: <code>/home/service/shared/socket/redmine/unicorn.sock</code>.</p>
 
-<p>Then, we&#8217;ll tweak some options from the
+<p>Then, we&rsquo;ll tweak some options from the
 <a href="https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf">sample nginx.conf file</a>
 shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
 
@@ -231,7 +231,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
     <link href="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/"/>
     <updated>2012-12-07T17:47:00+01:00</updated>
     <id>http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+    <content type="html"><![CDATA[<p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&rsquo;t totally clear for virtual hosted-style requests.</p>
 
 <p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
 
@@ -412,14 +412,14 @@ end</code></pre></noscript></div>
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
 
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &ldquo;esto es lo que estaba buscando&rdquo;.</p>
 
 <!-- more -->
 
 
 <h3><em>Esto es lo que estaba buscando</em></h3>
 
-<p>Su autor define Octopress como <em>&#8220;A blogging framework for hackers&#8221;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
+<p>Su autor define Octopress como <em>&ldquo;A blogging framework for hackers&rdquo;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
 
 <p>Está basado en el generador de sitios estáticos <a href="https://github.com/mojombo/jekyll">Jekyll</a>, especialmente utilizado para construir blogs y ahora motor de <a href="http://pages.github.com/">GitHub Pages</a>, al que Octopress especializa como plataforma de blogging <em>ready-to-use</em> a través templates en front-end (HTML5, responsive layout, Compass…) y una colección de herramientas con las que generar y gestionar los contenidos.</p>
 
@@ -603,7 +603,7 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <ol>
 <li>Home Feed, que es el Timeline público habitual.</li>
-<li>Una lista privada llamada &#8220;timeline&#8221;, en la que sitúo a aquellos usuarios con los que tengo una comunicación más activa. La observo más frecuentemente que el Timeline público.</li>
+<li>Una lista privada llamada &ldquo;timeline&rdquo;, en la que sitúo a aquellos usuarios con los que tengo una comunicación más activa. La observo más frecuentemente que el Timeline público.</li>
 <li>Menciones, no hay mucho que contar aquí.</li>
 <li>Tweets enviados, ya que suelo necesitar un histórico de mis envíos.</li>
 </ol>
@@ -625,7 +625,7 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <p>Por último, <em>Pending</em> muestra una única columna de tweets programados y pendientes de envío, otra de las funcionalidades de HootSuite. Realmente la utilizo contadas veces, pero su especial naturaleza me obliga a aislarla del contenido en tiempo real.</p>
 
-<p>Twitter es una fuente inmensa de contenidos y una correcta organización evitará que pasemos por alto tweets y enlaces relevantes y nos ayudará a aislar el &#8220;ruido&#8221; que es pocas veces útil.</p>
+<p>Twitter es una fuente inmensa de contenidos y una correcta organización evitará que pasemos por alto tweets y enlaces relevantes y nos ayudará a aislar el &ldquo;ruido&rdquo; que es pocas veces útil.</p>
 
 <p>Probablemente la gestión de contenido en Twitter es algo muy personal y dependiente de vuestra profesión o intereses, por supuesto indispensable para los llamados Social Media y Community Managers aunque también útil para los meros usuarios como yo.</p>
 ]]></content>
@@ -658,9 +658,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
     <link href="http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux/"/>
     <updated>2009-12-29T00:00:00+01:00</updated>
     <id>http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux</id>
-    <content type="html"><![CDATA[<p>Desde <a href="http://futurist.se/gldt">http://futurist.se/gldt/</a> se está realizando un gran trabajo creando y manteniendo un mapa de distribuciones GNU/Linux que abarca su evolución, derivaciones y bifurcaciones en el tiempo partiendo de distribuciones &#8220;maestras&#8221; como Debian, Slackware, Red Hat y muchas otras.</p>
+    <content type="html"><![CDATA[<p>Desde <a href="http://futurist.se/gldt">http://futurist.se/gldt/</a> se está realizando un gran trabajo creando y manteniendo un mapa de distribuciones GNU/Linux que abarca su evolución, derivaciones y bifurcaciones en el tiempo partiendo de distribuciones &ldquo;maestras&rdquo; como Debian, Slackware, Red Hat y muchas otras.</p>
 
-<p>A continuación os muestro la última versión hasta el momento (9.3). Es posible que existan actualizaciones en el fichero debido a que ciertas familias de distribuciones están en constante derivación, todo ello está correctamente versionado en http://futurist.se/gldt/.</p>
+<p>A continuación os muestro la última versión hasta el momento (9.3). Es posible que existan actualizaciones en el fichero debido a que ciertas familias de distribuciones están en constante derivación, todo ello está correctamente versionado en <a href="http://futurist.se/gldt/.">http://futurist.se/gldt/.</a></p>
 
 <!-- more -->
 
@@ -764,7 +764,7 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <p>Para trabajar con LESS, una vez instalado en nuestro sistema a través de ruby-gems, editaremos un archivo con extensión .less que utilizaremos para generar el CSS estándar de forma automática a través de la gema.</p>
 
-<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de http://github.com/cloudhead/less/tree):</p>
+<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de <a href="http://github.com/cloudhead/less/tree">http://github.com/cloudhead/less/tree</a>):</p>
 
 <h4>LESS</h4>
 
@@ -861,7 +861,7 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <ol>
 <li>Abrimos las Preferencias de Aptana</li>
-<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto &#8220;color&#8221; para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
+<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto &ldquo;color&rdquo; para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
 </ol>
 
 
@@ -889,16 +889,16 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <p>En este caso debemos solicitar una Licencia de distribución a Adobe a través del un formulario en el que debemos aportar cierta información sobre el proyecto para el que solicitamos la licencia.Una vez Adobe haya estudiado y aprobado nuestra solicitud de licencia (puede tardar unos 3 días laborables), se nos aportará una completa documentación sobre las formas de distribución del Runtime junto a nuestras aplicaciones.</p>
 
-<p>Las posibilidades se reducen a la instalación del Runtime junto a nuestra aplicación (un único proceso de instalación &#8220;invisible&#8221; al usuario) o instalación del Runtime standalone seguido de nuestra aplicación (orientado principalmente a equipos IT que realicen la instalación de forma silenciosa a través de la intranet de su empresa).</p>
+<p>Las posibilidades se reducen a la instalación del Runtime junto a nuestra aplicación (un único proceso de instalación &ldquo;invisible&rdquo; al usuario) o instalación del Runtime standalone seguido de nuestra aplicación (orientado principalmente a equipos IT que realicen la instalación de forma silenciosa a través de la intranet de su empresa).</p>
 
 <p>Comentar también que la concesión de Licencia de distribución por parte de Adobe no nos da libertad total en cuanto al Runtime, por ejemplo no se permite su distribución con modificaciones por nuestra parte. Este es un extracto de la Descripción general de licencia aportada por Adobe referente a las condiciones que debemos cumplir al aceptar la licencia:</p>
 
 <blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
 El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
-El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección license-air@adobe.com para obtener más información.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#108;&#105;&#x63;&#101;&#x6e;&#x73;&#x65;&#45;&#97;&#x69;&#114;&#64;&#x61;&#100;&#111;&#x62;&#101;&#46;&#99;&#x6f;&#109;">&#x6c;&#105;&#x63;&#101;&#110;&#115;&#101;&#x2d;&#97;&#x69;&#x72;&#x40;&#97;&#x64;&#111;&#x62;&#x65;&#x2e;&#99;&#111;&#x6d;</a> para obtener más información.
 El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
 El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
-Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &#8220;Includes Adobe AIR&#8221; (&#8220;Incluye Adobe AIR&#8221;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
+Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
 El receptor de la licencia no podrá distribuir el instalador o los archivos del instalador de Adobe AIR con el fin de evitar la instalación del tiempo de ejecución de Adobe AIR, una aplicación de Adobe AIR o el EULA.
 El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecución de Adobe AIR, sus bibliotecas, componentes o archivos del instalador de un modo no documentado. Consulte las preguntas frecuentes para obtener información más detallada.</p></blockquote>
 
@@ -971,7 +971,7 @@ La mayoría de estos sitios web incluyen completas posibilidades colaborativas, 
 
 <h3>Inspiración</h3>
 
-<p>Soy partidario de &#8220;curiosear&#8221; en estos enormes repositorios para captar ideas, metodologías o simplemente buenas prácticas a la hora de desarrollar software en uno u otro lenguaje.</p>
+<p>Soy partidario de &ldquo;curiosear&rdquo; en estos enormes repositorios para captar ideas, metodologías o simplemente buenas prácticas a la hora de desarrollar software en uno u otro lenguaje.</p>
 
 <h3>Resolución de problemas</h3>
 

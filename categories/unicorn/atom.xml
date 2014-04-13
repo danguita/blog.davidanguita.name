@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unicorn | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/unicorn/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2013-11-03T18:56:31+01:00</updated>
+  <updated>2014-04-13T12:22:28+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -19,10 +19,10 @@
     <updated>2013-03-03T17:04:00+01:00</updated>
     <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
     <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It's open source, free and is built using Ruby on Rails.</p>
+It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 
 <p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It's an everyday tool so we need to have an always ready
+documenting processes. It&rsquo;s an everyday tool so we need to have an always ready
 Redmine instance within our private domain.</p>
 
 <!-- more -->
@@ -42,7 +42,7 @@ some lightweight processes with low I/O load.</p>
 
 <h4>Add your service user</h4>
 
-<p>We're so bad choosing funny names so our service username is <code>service</code>.</p>
+<p>We&rsquo;re so bad choosing funny names so our service username is <code>service</code>.</p>
 
 <h3>Redmine</h3>
 
@@ -53,7 +53,7 @@ $ git clone git://github.com/redmine/redmine.git ~/apps/redmine
 </code></pre>
 
 <p>Install and set up your database engine server (MySQL, PostgreSQL…) and edit the
-<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you'll
+<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&rsquo;ll
 be ready to set up the production environment:</p>
 
 <pre><code>$ cd ~/apps/redmine
@@ -63,16 +63,16 @@ $ RAILS_ENV=production bundle exec rake db:migrate
 
 <h3>Unicorn</h3>
 
-<h4>"unicorn" gem</h4>
+<h4>&ldquo;unicorn&rdquo; gem</h4>
 
 <p>Add the <code>unicorn</code> gem as an application dependency by adding a
 <code>Gemfile.local</code> file (unobtrusive way to add dependencies)
 with this content:</p>
 
 <p>``` ruby ~/apps/redmine/Gemfile.local
-source 'https://rubygems.org'</p>
+source &lsquo;<a href="https://rubygems.org">https://rubygems.org</a>&rsquo;</p>
 
-<p>gem 'unicorn'
+<p>gem &lsquo;unicorn&rsquo;
 ```</p>
 
 <p>After that you should run <code>bundle install</code> again:</p>
@@ -122,7 +122,7 @@ lines:</p>
 </ul>
 
 
-<h4>"Automate everything"</h4>
+<h4>&ldquo;Automate everything&rdquo;</h4>
 
 <p>We put all service-related scripts in the <code>~/script</code> directory.
 These commands might help you on launching and stopping Unicorn
@@ -182,14 +182,14 @@ a proxy will be listening for processes on the specified host and port.</p>
 and Redmine application should start and be served through the new
 VirtualHost.</p>
 
-<p>Now it's time to do some tests in order to adjust the number of Unicorn workers
+<p>Now it&rsquo;s time to do some tests in order to adjust the number of Unicorn workers
 you need to have running on your server.</p>
 
 <h2>Bonus: Setting up Nginx as a frontend of Unicorn</h2>
 
 <p>As some of you <a href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303">have</a>
 <a href="http://twitter.com/mayoral">mentioned</a>, Nginx is generally a better choice
-for micro instances. It consumes much less RAM and it's faster than
+for micro instances. It consumes much less RAM and it&rsquo;s faster than
 Apache due its event-driven approach.</p>
 
 <p>Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
@@ -199,7 +199,7 @@ too so there we go:</p>
 <code>unicorn.conf.rb</code> (<code>listen</code> option), so your socket can be located in a path
 like this one: <code>/home/service/shared/socket/redmine/unicorn.sock</code>.</p>
 
-<p>Then, we'll tweak some options from the
+<p>Then, we&rsquo;ll tweak some options from the
 <a href="https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf">sample nginx.conf file</a>
 shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
 

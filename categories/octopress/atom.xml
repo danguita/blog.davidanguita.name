@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2013-11-03T18:56:31+01:00</updated>
+  <updated>2014-04-13T12:22:28+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -22,14 +22,14 @@
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
 
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que "esto es lo que estaba buscando".</p>
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &ldquo;esto es lo que estaba buscando&rdquo;.</p>
 
 <!-- more -->
 
 
 <h3><em>Esto es lo que estaba buscando</em></h3>
 
-<p>Su autor define Octopress como <em>"A blogging framework for hackers"</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
+<p>Su autor define Octopress como <em>&ldquo;A blogging framework for hackers&rdquo;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
 
 <p>Está basado en el generador de sitios estáticos <a href="https://github.com/mojombo/jekyll">Jekyll</a>, especialmente utilizado para construir blogs y ahora motor de <a href="http://pages.github.com/">GitHub Pages</a>, al que Octopress especializa como plataforma de blogging <em>ready-to-use</em> a través templates en front-end (HTML5, responsive layout, Compass…) y una colección de herramientas con las que generar y gestionar los contenidos.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Aptana | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/aptana/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2013-11-03T18:56:31+01:00</updated>
+  <updated>2014-04-13T12:22:28+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -60,7 +60,7 @@
 
 <ol>
 <li>Abrimos las Preferencias de Aptana</li>
-<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto "color" para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
+<li>En el filtro de Preferencias (esquina superior izquierda) escribimos el texto &ldquo;color&rdquo; para mostrar únicamente las secciones de color para cada uno de los Editores disponibles en Aptana.</li>
 </ol>
 
 

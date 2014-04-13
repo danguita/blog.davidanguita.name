@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Front-end | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/front-end/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2013-11-03T18:56:31+01:00</updated>
+  <updated>2014-04-13T12:22:28+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -95,7 +95,7 @@
 
 <p>Para trabajar con LESS, una vez instalado en nuestro sistema a través de ruby-gems, editaremos un archivo con extensión .less que utilizaremos para generar el CSS estándar de forma automática a través de la gema.</p>
 
-<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de http://github.com/cloudhead/less/tree):</p>
+<p>Este es un buen ejemplo de código LESS y su correspondiente CSS generado aplicando la mayoría de sus mejoras (extraído de <a href="http://github.com/cloudhead/less/tree">http://github.com/cloudhead/less/tree</a>):</p>
 
 <h4>LESS</h4>
 

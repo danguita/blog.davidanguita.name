@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Migrando a Octopress - I solve problems - David Anguita</title>
+  <title>Migrando a Octopress - I solve problems</title>
   <meta name="author" content="David Anguita">
 
   
@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/">
+  <link rel="canonical" href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="I solve problems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -109,14 +110,14 @@
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
 
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &ldquo;esto es lo que estaba buscando&rdquo;.</p>
 
 <!-- more -->
 
 
 <h3><em>Esto es lo que estaba buscando</em></h3>
 
-<p>Su autor define Octopress como <em>&#8220;A blogging framework for hackers&#8221;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
+<p>Su autor define Octopress como <em>&ldquo;A blogging framework for hackers&rdquo;</em>, algo pretencioso pero buena declaración de intenciones. Nos vale.</p>
 
 <p>Está basado en el generador de sitios estáticos <a href="https://github.com/mojombo/jekyll">Jekyll</a>, especialmente utilizado para construir blogs y ahora motor de <a href="http://pages.github.com/">GitHub Pages</a>, al que Octopress especializa como plataforma de blogging <em>ready-to-use</em> a través templates en front-end (HTML5, responsive layout, Compass…) y una colección de herramientas con las que generar y gestionar los contenidos.</p>
 
@@ -214,7 +215,7 @@ eficiente.</li>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/" >Tweet</a>
   
   
   
@@ -278,23 +279,6 @@ eficiente.</li>
 </section>
 
 <section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("danguita", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/danguita" class="twitter-follow-button" data-show-count="false">Follow @danguita</a>
-  
-</section>
-
-
-<section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
@@ -303,7 +287,7 @@ eficiente.</li>
   <a href="https://github.com/danguita">@danguita</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -321,14 +305,6 @@ eficiente.</li>
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/danguita?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/danguita">My Delicious Bookmarks &raquo;</a></p>
 </section>
 
 
@@ -350,7 +326,7 @@ eficiente.</li>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - David Anguita -
+  Copyright &copy; 2014 - David Anguita -
   <span class="license"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></span> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> &amp; <a href="https://github.com/danguita/blog.davidanguita.name/tree/gh-pages">GitHub Pages</a></span>
 </p>
@@ -369,7 +345,7 @@ eficiente.</li>
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -380,7 +356,7 @@ eficiente.</li>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -394,7 +370,7 @@ eficiente.</li>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

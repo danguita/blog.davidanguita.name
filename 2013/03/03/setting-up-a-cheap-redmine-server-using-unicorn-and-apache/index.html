@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Setting up a cheap Redmine server using Unicorn and Apache - I solve problems - David Anguita</title>
+  <title>Setting up a cheap Redmine server using Unicorn and Apache - I solve problems</title>
   <meta name="author" content="David Anguita">
 
   
   <meta name="description" content="Redmine is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
+It&rsquo;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,13 +19,14 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/">
+  <link rel="canonical" href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="I solve problems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -107,10 +108,10 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
 
 
 <div class="entry-content"><p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
+It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 
 <p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
+documenting processes. It&rsquo;s an everyday tool so we need to have an always ready
 Redmine instance within our private domain.</p>
 
 <!-- more -->
@@ -130,7 +131,7 @@ some lightweight processes with low I/O load.</p>
 
 <h4>Add your service user</h4>
 
-<p>We&#8217;re so bad choosing funny names so our service username is <code>service</code>.</p>
+<p>We&rsquo;re so bad choosing funny names so our service username is <code>service</code>.</p>
 
 <h3>Redmine</h3>
 
@@ -141,7 +142,7 @@ $ git clone git://github.com/redmine/redmine.git ~/apps/redmine
 </code></pre>
 
 <p>Install and set up your database engine server (MySQL, PostgreSQL…) and edit the
-<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&#8217;ll
+<code>~/apps/redmine/config/database.yml</code> file to match these settings. Then you&rsquo;ll
 be ready to set up the production environment:</p>
 
 <pre><code>$ cd ~/apps/redmine
@@ -151,7 +152,7 @@ $ RAILS_ENV=production bundle exec rake db:migrate
 
 <h3>Unicorn</h3>
 
-<h4>&#8220;unicorn&#8221; gem</h4>
+<h4>&ldquo;unicorn&rdquo; gem</h4>
 
 <p>Add the <code>unicorn</code> gem as an application dependency by adding a
 <code>Gemfile.local</code> file (unobtrusive way to add dependencies)
@@ -213,7 +214,7 @@ lines:</p>
 </ul>
 
 
-<h4>&#8220;Automate everything&#8221;</h4>
+<h4>&ldquo;Automate everything&rdquo;</h4>
 
 <p>We put all service-related scripts in the <code>~/script</code> directory.
 These commands might help you on launching and stopping Unicorn
@@ -275,14 +276,14 @@ a proxy will be listening for processes on the specified host and port.</p>
 and Redmine application should start and be served through the new
 VirtualHost.</p>
 
-<p>Now it&#8217;s time to do some tests in order to adjust the number of Unicorn workers
+<p>Now it&rsquo;s time to do some tests in order to adjust the number of Unicorn workers
 you need to have running on your server.</p>
 
 <h2>Bonus: Setting up Nginx as a frontend of Unicorn</h2>
 
 <p>As some of you <a href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/#comment-821879303">have</a>
 <a href="http://twitter.com/mayoral">mentioned</a>, Nginx is generally a better choice
-for micro instances. It consumes much less RAM and it&#8217;s faster than
+for micro instances. It consumes much less RAM and it&rsquo;s faster than
 Apache due its event-driven approach.</p>
 
 <p>Setting up Nginx instead of Apache2 as a frontend of Unicorn processes is trivial
@@ -292,7 +293,7 @@ too so there we go:</p>
 <code>unicorn.conf.rb</code> (<code>listen</code> option), so your socket can be located in a path
 like this one: <code>/home/service/shared/socket/redmine/unicorn.sock</code>.</p>
 
-<p>Then, we&#8217;ll tweak some options from the
+<p>Then, we&rsquo;ll tweak some options from the
 <a href="https://github.com/defunkt/unicorn/blob/master/examples/nginx.conf">sample nginx.conf file</a>
 shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
 
@@ -347,7 +348,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/" >Tweet</a>
   
   
   
@@ -409,23 +410,6 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
 </section>
 
 <section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("danguita", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/danguita" class="twitter-follow-button" data-show-count="false">Follow @danguita</a>
-  
-</section>
-
-
-<section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
@@ -434,7 +418,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
   <a href="https://github.com/danguita">@danguita</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -452,14 +436,6 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/danguita?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/danguita">My Delicious Bookmarks &raquo;</a></p>
 </section>
 
 
@@ -481,7 +457,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - David Anguita -
+  Copyright &copy; 2014 - David Anguita -
   <span class="license"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></span> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> &amp; <a href="https://github.com/danguita/blog.davidanguita.name/tree/gh-pages">GitHub Pages</a></span>
 </p>
@@ -500,7 +476,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -511,7 +487,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -525,7 +501,7 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>I solve problems - David Anguita</title>
+  <title>I solve problems</title>
   <meta name="author" content="David Anguita">
 
   
   <meta name="description" content="Redmine is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
+It&rsquo;s open source, free and is built using Ruby on Rails. We use Redmine as our main &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,13 +19,14 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.davidanguita.name/">
+  <link rel="canonical" href="http://blog.davidanguita.name">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="I solve problems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -110,10 +111,10 @@ It&#8217;s open source, free and is built using Ruby on Rails. We use Redmine as
 
 
   <div class="entry-content"><p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
-It&#8217;s open source, free and is built using Ruby on Rails.</p>
+It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 
 <p>We use Redmine as our main tool for planning, issue tracking and
-documenting processes. It&#8217;s an everyday tool so we need to have an always ready
+documenting processes. It&rsquo;s an everyday tool so we need to have an always ready
 Redmine instance within our private domain.</p>
 
 </div>
@@ -155,7 +156,7 @@ Redmine instance within our private domain.</p>
   </header>
 
 
-  <div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&#8217;t totally clear for virtual hosted-style requests.</p>
+  <div class="entry-content"><p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&rsquo;t totally clear for virtual hosted-style requests.</p>
 
 <p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
 
@@ -285,7 +286,7 @@ end
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
 
-<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &#8220;esto es lo que estaba buscando&#8221;.</p>
+<p>Por otro lado, hace tiempo que conozco y he trabajado con <a href="https://github.com/mojombo/jekyll">Jekyll</a> y más tarde con <a href="http://octopress.org">Octopress</a>, con los que desde el primer despliegue tuve claro que &ldquo;esto es lo que estaba buscando&rdquo;.</p>
 
 </div>
   
@@ -319,7 +320,7 @@ end
   
 
 
-<time datetime="2010-08-19T00:00:00+02:00" pubdate data-updated="true">Aug 19<span>th</span>, 2010</time>
+<time datetime="2010-08-19T00:00:00+02:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -388,23 +389,6 @@ end
 </section>
 
 <section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("danguita", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/danguita" class="twitter-follow-button" data-show-count="false">Follow @danguita</a>
-  
-</section>
-
-
-<section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating&#8230;</li>
@@ -413,7 +397,7 @@ end
   <a href="https://github.com/danguita">@danguita</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -434,14 +418,6 @@ end
 </section>
 
 
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/danguita?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/danguita">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-
 <section class="googleplus">
   <h1>
     <a href="https://plus.google.com/104025545957647098498?rel=author">
@@ -459,7 +435,7 @@ end
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - David Anguita -
+  Copyright &copy; 2014 - David Anguita -
   <span class="license"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></span> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> &amp; <a href="https://github.com/danguita/blog.davidanguita.name/tree/gh-pages">GitHub Pages</a></span>
 </p>
@@ -475,7 +451,7 @@ end
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -486,7 +462,7 @@ end
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -500,7 +476,7 @@ end
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
