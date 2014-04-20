@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Escritorio | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/escritorio/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2014-04-13T14:01:26+02:00</updated>
+  <updated>2014-04-20T21:20:24+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -39,7 +39,7 @@
 
 <blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
 El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
-El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#108;&#105;&#x63;&#x65;&#x6e;&#115;&#x65;&#45;&#97;&#x69;&#x72;&#x40;&#x61;&#100;&#x6f;&#98;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#105;&#x63;&#x65;&#110;&#115;&#101;&#45;&#97;&#105;&#114;&#64;&#x61;&#x64;&#x6f;&#x62;&#x65;&#x2e;&#x63;&#111;&#x6d;</a> para obtener más información.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6c;&#105;&#99;&#101;&#110;&#x73;&#x65;&#45;&#97;&#x69;&#114;&#64;&#x61;&#100;&#x6f;&#x62;&#x65;&#46;&#99;&#x6f;&#109;">&#108;&#105;&#99;&#101;&#110;&#115;&#x65;&#x2d;&#97;&#x69;&#114;&#64;&#x61;&#100;&#111;&#x62;&#x65;&#46;&#x63;&#111;&#x6d;</a> para obtener más información.
 El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
 El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
 Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
