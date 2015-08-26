@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <link rel="canonical" href="http://davidanguita.name/articles/distribucion-del-runtime-adobe-air"/>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="refresh" content="0;url=http://davidanguita.name/articles/distribucion-del-runtime-adobe-air" />
+
+  <title>Distribución del Runtime Adobe AIR - I solve problems - David Anguita</title>
+  <meta name="author" content="David Anguita">
+
+  
+  <meta name="description" content="Recientemente he trabajado con la tecnología Adobe AIR 1.5 en su perfil AJAX, que nos permite desarrollar RIA (Rich Internet Applications) como &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="I solve problems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45408606-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<aside class="left">
+			<div class="inner-left">
+				<header>
+					
+  <img src="http://www.gravatar.com/avatar/cd2e3ba306d19910a2900955667317ee?s=200" alt="Gravatar of David Anguita " title="Gravatar of David Anguita" class="profilepic" />
+
+
+<hgroup>
+  <h1><a href="/">I solve problems</a></h1>
+  <section>
+  
+    <h2>David Anguita</h2>
+  
+
+  <p>
+    Hi, I'm a freelance software developer &amp; consultant specialized in Ruby on Rails.
+  </p>
+  <p>
+    Take a look to my <a href="http://davidanguita.name">personal website</a>, send me <a href="mailto:david@davidanguita.name">an email</a> or follow me <a href="http://twitter.com/danguita">on Twitter</a>.
+  </p>
+</section>
+
+</hgroup>
+
+
+				</header>
+			</div>
+		</aside>
+    	<section class="right">
+    		<div class="inner-right">
+    			<div id="posts">
+    			  	<article class="post">
+    
+  <header>
+    
+      <h1 class="entry-title">Distribución del Runtime Adobe AIR</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-26T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
+
+<p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
+
+<!-- more -->
+
+
+<h3>Distribución web</h3>
+
+<p>A través de esta opción no es necesario firmar ninguna Licencia de Distribución siempre y cuando empleemos el medio de distribución web de aplicaciones Adobe AIR proporcionado por Adobe y conocido como Badge Install. Se trata de un pequeño script web (JavaScript y Flash) que tras una sencilla configuración permite descargar e instalar el Runtime desde los propios servidores de Adobe y nuestra aplicación (desde el servidor que decidamos, las condiciones de distribución afectan únicamente al Runtime) en un único proceso de instalación.</p>
+
+<h3>Distribución en soportes físicos (CD/DVD)</h3>
+
+<p>En este caso debemos solicitar una Licencia de distribución a Adobe a través del un formulario en el que debemos aportar cierta información sobre el proyecto para el que solicitamos la licencia.Una vez Adobe haya estudiado y aprobado nuestra solicitud de licencia (puede tardar unos 3 días laborables), se nos aportará una completa documentación sobre las formas de distribución del Runtime junto a nuestras aplicaciones.</p>
+
+<p>Las posibilidades se reducen a la instalación del Runtime junto a nuestra aplicación (un único proceso de instalación &ldquo;invisible&rdquo; al usuario) o instalación del Runtime standalone seguido de nuestra aplicación (orientado principalmente a equipos IT que realicen la instalación de forma silenciosa a través de la intranet de su empresa).</p>
+
+<p>Comentar también que la concesión de Licencia de distribución por parte de Adobe no nos da libertad total en cuanto al Runtime, por ejemplo no se permite su distribución con modificaciones por nuestra parte. Este es un extracto de la Descripción general de licencia aportada por Adobe referente a las condiciones que debemos cumplir al aceptar la licencia:</p>
+
+<blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
+El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#108;&#105;&#x63;&#x65;&#x6e;&#115;&#101;&#45;&#x61;&#x69;&#114;&#x40;&#97;&#100;&#111;&#98;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x6c;&#105;&#x63;&#x65;&#110;&#115;&#x65;&#x2d;&#97;&#105;&#x72;&#64;&#97;&#100;&#x6f;&#98;&#x65;&#x2e;&#x63;&#111;&#109;</a> para obtener más información.
+El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
+El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
+Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
+El receptor de la licencia no podrá distribuir el instalador o los archivos del instalador de Adobe AIR con el fin de evitar la instalación del tiempo de ejecución de Adobe AIR, una aplicación de Adobe AIR o el EULA.
+El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecución de Adobe AIR, sus bibliotecas, componentes o archivos del instalador de un modo no documentado. Consulte las preguntas frecuentes para obtener información más detallada.</p></blockquote>
+
+<p>El número de aplicaciones desarrolladas con esta tecnología crece día a día (probablemente todos nosotros tenemos alguna aplicación AIR instalada en nuestro sistema o incluso la utilizamos habitualmente –los tuiteros lo sabrán bien por clientes como TweetDeck–) y aparentemente el medio de distribución más utilizado es el web, lo que nos aleja de la citada maraña de condiciones de distribución, aunque es muy útil conocerlas cuando, como es mi caso, realizamos una distribución a través de soportes físicos.</p>
+
+<h4>Enlaces de interés:</h4>
+
+<ul>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution1.html">Distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/es/products/air/runtime_distribution_faq.html">Preguntas frecuentes sobre la distribución del tiempo de ejecución de Adobe© AIR™</a></li>
+<li><a href="http://www.adobe.com/devnet/air/articles/air_badge_install.html">Deploying Adobe AIR applications seamlessly with badge install (Inglés)</a></li>
+</ul>
+
+</div>
+
+
+</article>
+
+
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/" data-via="danguita" data-counturl="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+
+
+
+
+    			</div>
+    			<footer id="footer">
+    				<p class="credit">
+  Copyright &copy; 2015 - David Anguita. Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+
+
+    			</footer>
+    			
+
+<script type="text/javascript">
+      var disqus_shortname = 'isolveproblems';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45408606-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+    		</div>
+    	</section>
+  	</div>
+</body>
+</html>

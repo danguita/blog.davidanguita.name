@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Adobe AIR | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/adobe-air/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Distribución del Runtime Adobe AIR]]></title>
-    <link href="http://blog.davidanguita.name/distribucion-del-runtime-adobe-air/"/>
+    <link href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/"/>
     <updated>2009-11-26T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/distribucion-del-runtime-adobe-air</id>
+    <id>http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air</id>
     <content type="html"><![CDATA[<p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
 
 <p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
@@ -39,7 +39,7 @@
 
 <blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
 El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
-El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#105;&#99;&#101;&#x6e;&#x73;&#101;&#x2d;&#x61;&#105;&#x72;&#x40;&#x61;&#x64;&#x6f;&#x62;&#101;&#x2e;&#x63;&#x6f;&#109;">&#x6c;&#105;&#99;&#101;&#110;&#115;&#x65;&#x2d;&#97;&#x69;&#114;&#64;&#x61;&#100;&#111;&#98;&#101;&#x2e;&#99;&#111;&#109;</a> para obtener más información.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x6c;&#105;&#x63;&#101;&#x6e;&#x73;&#x65;&#45;&#x61;&#105;&#114;&#64;&#x61;&#100;&#111;&#x62;&#101;&#46;&#x63;&#111;&#x6d;">&#x6c;&#105;&#99;&#101;&#x6e;&#x73;&#x65;&#45;&#97;&#x69;&#114;&#64;&#x61;&#100;&#x6f;&#98;&#x65;&#x2e;&#99;&#x6f;&#109;</a> para obtener más información.
 El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
 El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
 Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.

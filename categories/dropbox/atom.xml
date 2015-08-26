@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Dropbox | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/dropbox/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
-    <link href="http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
     <updated>2010-08-19T00:00:00+02:00</updated>
-    <id>http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
     <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
 
 <p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>

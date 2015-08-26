@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TTS | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/tts/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Text.to_speech through tts-api.com]]></title>
-    <link href="http://blog.davidanguita.name/text-to-speech-through-tts-api-com/"/>
+    <link href="http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com/"/>
     <updated>2012-11-23T09:09:00+01:00</updated>
-    <id>http://blog.davidanguita.name/text-to-speech-through-tts-api-com</id>
+    <id>http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com</id>
     <content type="html"><![CDATA[<p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
 
 <ul>

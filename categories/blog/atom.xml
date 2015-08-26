@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Blog | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/blog/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Migrando a Octopress]]></title>
-    <link href="http://blog.davidanguita.name/migrando-a-octopress/"/>
+    <link href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/"/>
     <updated>2012-11-20T09:13:00+01:00</updated>
-    <id>http://blog.davidanguita.name/migrando-a-octopress</id>
+    <id>http://blog.davidanguita.name/2012/11/20/migrando-a-octopress</id>
     <content type="html"><![CDATA[<h3>Motivación</h3>
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>

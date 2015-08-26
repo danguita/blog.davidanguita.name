@@ -4,7 +4,7 @@
   <title><![CDATA[I solve problems]]></title>
   <link href="http://blog.davidanguita.name/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting up a cheap Redmine server using Unicorn and Apache]]></title>
-    <link href="http://blog.davidanguita.name/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
+    <link href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
     <updated>2013-03-03T17:04:00+01:00</updated>
-    <id>http://blog.davidanguita.name/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
+    <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
     <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
 It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 
@@ -228,9 +228,9 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
   
   <entry>
     <title type="html"><![CDATA[Paperclip defaults for Amazon S3 virtual hosted-style requests]]></title>
-    <link href="http://blog.davidanguita.name/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/"/>
+    <link href="http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests/"/>
     <updated>2012-12-07T17:47:00+01:00</updated>
-    <id>http://blog.davidanguita.name/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests</id>
+    <id>http://blog.davidanguita.name/2012/12/07/paperclip-defaults-for-amazon-s3-virtual-hosted-style-requests</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/thoughtbot/paperclip">Paperclip</a> is a great gem for adding file attachments to your Rails models. It ships with some storage adapters including Amazon S3 but the documentation isn&rsquo;t totally clear for virtual hosted-style requests.</p>
 
 <p>If you need to use classic path-style requests like <code>http://s3.amazonaws.com/yourbucket</code>, add these defaults to your environment file:</p>
@@ -306,9 +306,9 @@ shipped with Unicorn in order to <em>serve</em> our Unicorn processes:</p>
   
   <entry>
     <title type="html"><![CDATA[Text.to_speech through tts-api.com]]></title>
-    <link href="http://blog.davidanguita.name/text-to-speech-through-tts-api-com/"/>
+    <link href="http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com/"/>
     <updated>2012-11-23T09:09:00+01:00</updated>
-    <id>http://blog.davidanguita.name/text-to-speech-through-tts-api-com</id>
+    <id>http://blog.davidanguita.name/2012/11/23/text-to-speech-through-tts-api-com</id>
     <content type="html"><![CDATA[<p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
 
 <ul>
@@ -405,9 +405,9 @@ end</code></pre></noscript></div>
   
   <entry>
     <title type="html"><![CDATA[Migrando a Octopress]]></title>
-    <link href="http://blog.davidanguita.name/migrando-a-octopress/"/>
+    <link href="http://blog.davidanguita.name/2012/11/20/migrando-a-octopress/"/>
     <updated>2012-11-20T09:13:00+01:00</updated>
-    <id>http://blog.davidanguita.name/migrando-a-octopress</id>
+    <id>http://blog.davidanguita.name/2012/11/20/migrando-a-octopress</id>
     <content type="html"><![CDATA[<h3>Motivación</h3>
 
 <p>Me decanté por Posterous buscando comodidad para crear contenidos y a los pocos meses se convirtió en un lastre que provocaba justo lo contrario. Si a esto le sumamos su adquisición por parte de Twitter, que convertirá el servicio en software congelado, mis ganas de migrar se multiplicaron.</p>
@@ -486,9 +486,9 @@ eficiente.</li>
   
   <entry>
     <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
-    <link href="http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
     <updated>2010-08-19T00:00:00+02:00</updated>
-    <id>http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
     <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
 
 <p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
@@ -571,9 +571,9 @@ cliente Dropbox.</p>
   
   <entry>
     <title type="html"><![CDATA[Cómo gestiono Twitter con HootSuite]]></title>
-    <link href="http://blog.davidanguita.name/como-gestiono-twitter-desde-hootsuite/"/>
+    <link href="http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite/"/>
     <updated>2010-02-13T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/como-gestiono-twitter-desde-hootsuite</id>
+    <id>http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite</id>
     <content type="html"><![CDATA[<p>Hace algún tiempo abandoné clientes de escritorio como TweetDeck o Seesmic Desktop para pasar a utilizar el cliente web HootSuite como herramienta única de gestión de mi cuenta Twitter. El motivo no es otro que ser tan completo como cualquier cliente de escritorio actual y poseer una característica inherente a las aplicaciones web convencionales: Sólo necesito un navegador para utilizarla.
 HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos, pudiendo segmentar tu timeline en dos niveles: Pestañas y columnas.</p>
 
@@ -633,9 +633,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
   
   <entry>
     <title type="html"><![CDATA[La "Cheat Sheet" que todos hemos hecho alguna vez]]></title>
-    <link href="http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
+    <link href="http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
     <updated>2010-01-07T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
+    <id>http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
     <content type="html"><![CDATA[<p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
 
 <p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>
@@ -655,9 +655,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
   
   <entry>
     <title type="html"><![CDATA[Línea del tiempo de distribuciones GNU/Linux]]></title>
-    <link href="http://blog.davidanguita.name/linea-del-tiempo-de-distribuciones-gnu-linux/"/>
+    <link href="http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux/"/>
     <updated>2009-12-29T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/linea-del-tiempo-de-distribuciones-gnu-linux</id>
+    <id>http://blog.davidanguita.name/2009/12/29/linea-del-tiempo-de-distribuciones-gnu-linux</id>
     <content type="html"><![CDATA[<p>Desde <a href="http://futurist.se/gldt">http://futurist.se/gldt/</a> se está realizando un gran trabajo creando y manteniendo un mapa de distribuciones GNU/Linux que abarca su evolución, derivaciones y bifurcaciones en el tiempo partiendo de distribuciones &ldquo;maestras&rdquo; como Debian, Slackware, Red Hat y muchas otras.</p>
 
 <p>A continuación os muestro la última versión hasta el momento (9.3). Es posible que existan actualizaciones en el fichero debido a que ciertas familias de distribuciones están en constante derivación, todo ello está correctamente versionado en <a href="http://futurist.se/gldt/.">http://futurist.se/gldt/.</a></p>
@@ -671,9 +671,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
   
   <entry>
     <title type="html"><![CDATA[CSS extendido con LESS]]></title>
-    <link href="http://blog.davidanguita.name/css-extendido-con-less/"/>
+    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
     <updated>2009-12-05T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/css-extendido-con-less</id>
+    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
     <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
 
 <p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
@@ -816,9 +816,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
   
   <entry>
     <title type="html"><![CDATA[Resaltado de sintaxis en Aptana Studio]]></title>
-    <link href="http://blog.davidanguita.name/resaltado-de-sintaxis-en-aptana-studio/"/>
+    <link href="http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/"/>
     <updated>2009-11-27T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/resaltado-de-sintaxis-en-aptana-studio</id>
+    <id>http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio</id>
     <content type="html"><![CDATA[<p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
 
 <p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
@@ -871,9 +871,9 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
   
   <entry>
     <title type="html"><![CDATA[Distribución del Runtime Adobe AIR]]></title>
-    <link href="http://blog.davidanguita.name/distribucion-del-runtime-adobe-air/"/>
+    <link href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/"/>
     <updated>2009-11-26T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/distribucion-del-runtime-adobe-air</id>
+    <id>http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air</id>
     <content type="html"><![CDATA[<p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
 
 <p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
@@ -895,7 +895,7 @@ HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos,
 
 <blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
 El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
-El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#108;&#105;&#x63;&#101;&#110;&#115;&#x65;&#45;&#97;&#105;&#x72;&#x40;&#97;&#x64;&#x6f;&#98;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#x69;&#99;&#x65;&#x6e;&#115;&#x65;&#45;&#x61;&#x69;&#114;&#x40;&#97;&#100;&#111;&#98;&#x65;&#46;&#x63;&#111;&#109;</a> para obtener más información.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#108;&#105;&#x63;&#x65;&#x6e;&#115;&#101;&#45;&#x61;&#x69;&#114;&#x40;&#97;&#100;&#111;&#98;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x6c;&#105;&#x63;&#x65;&#110;&#115;&#x65;&#x2d;&#97;&#105;&#x72;&#64;&#97;&#100;&#x6f;&#98;&#x65;&#x2e;&#x63;&#111;&#109;</a> para obtener más información.
 El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
 El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
 Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
@@ -917,9 +917,9 @@ El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecuci
   
   <entry>
     <title type="html"><![CDATA[MacPorts, imprescindible para el switcher desde GNU/Linux]]></title>
-    <link href="http://blog.davidanguita.name/macports-imprescindible-para-el-switcher-desde-gnu-linux/"/>
+    <link href="http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux/"/>
     <updated>2009-11-08T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/macports-imprescindible-para-el-switcher-desde-gnu-linux</id>
+    <id>http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux</id>
     <content type="html"><![CDATA[<p>Siempre que en la comunidad Mac nos referimos a switcher, todo nos lleva a pensar que se trata de un usuario que abandona el tedioso Microsoft Windows para pasar a Mac OS X, aunque no es menos habitual que un switcher proceda de otros Sistemas Operativos como GNU/Linux. Este fue mi caso concreto, aunque no puedo considerarme switcher ya que nunca abandoné mi sistema original, los compagino muy a menudo aunque es cierto que el sistema en el que trabajo más horas diarias es OS X.</p>
 
 <p>Los usuarios de GNU/Linux en prácticamente cualquiera de sus distribuciones estarán habituados al concepto de sistema de gestión de paquetes (como es APT en distribuciones Debian/Ubuntu), algo de lo que no podemos disfrutar nativamente en nuestros OS X y que nos abstraería de arduas instalaciones de software desde los fuentes.</p>
@@ -954,9 +954,9 @@ El receptor de la licencia no podrá distribuir ni utilizar el tiempo de ejecuci
   
   <entry>
     <title type="html"><![CDATA[Repositorios de Snippets para todos]]></title>
-    <link href="http://blog.davidanguita.name/repositorios-de-snippets-para-todos/"/>
+    <link href="http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos/"/>
     <updated>2009-11-07T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/repositorios-de-snippets-para-todos</id>
+    <id>http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos</id>
     <content type="html"><![CDATA[<p>Un buen medio de formación, inspiración o resolución de problemas de todo desarrollador de software siempre ha sido el código de ejemplo junto al API o manual de turno, es por ello que me gustaría recomendar algunos sitios web que recopilan Snippets o fragmentos de código con un propósito específico, modulares y por tanto reutilizables, escritos prácticamente en cualquier lenguaje. Algunos repositorios van más allá albergando scripts de sistema, ficheros de configuración de servicios, recomendaciones para el uso de editores de texto y un largo etcétera.
 La mayoría de estos sitios web incluyen completas posibilidades colaborativas, permitiendo así que cualquier usuario registrado pueda comentar y proponer alternativas o correcciones al contenido (en forma de Snippet) publicado por otro usuario.</p>
 

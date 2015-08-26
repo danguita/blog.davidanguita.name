@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Apache | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/apache/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting up a cheap Redmine server using Unicorn and Apache]]></title>
-    <link href="http://blog.davidanguita.name/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
+    <link href="http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache/"/>
     <updated>2013-03-03T17:04:00+01:00</updated>
-    <id>http://blog.davidanguita.name/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
+    <id>http://blog.davidanguita.name/2013/03/03/setting-up-a-cheap-redmine-server-using-unicorn-and-apache</id>
     <content type="html"><![CDATA[<p><a href="http://redmine.org">Redmine</a> is an excellent web-based project management tool.
 It&rsquo;s open source, free and is built using Ruby on Rails.</p>
 

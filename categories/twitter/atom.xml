@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Twitter | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/twitter/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cómo gestiono Twitter con HootSuite]]></title>
-    <link href="http://blog.davidanguita.name/como-gestiono-twitter-desde-hootsuite/"/>
+    <link href="http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite/"/>
     <updated>2010-02-13T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/como-gestiono-twitter-desde-hootsuite</id>
+    <id>http://blog.davidanguita.name/2010/02/13/como-gestiono-twitter-desde-hootsuite</id>
     <content type="html"><![CDATA[<p>Hace algún tiempo abandoné clientes de escritorio como TweetDeck o Seesmic Desktop para pasar a utilizar el cliente web HootSuite como herramienta única de gestión de mi cuenta Twitter. El motivo no es otro que ser tan completo como cualquier cliente de escritorio actual y poseer una característica inherente a las aplicaciones web convencionales: Sólo necesito un navegador para utilizarla.
 HootSuite es especialmente flexible a la hora de filtrar y organizar contenidos, pudiendo segmentar tu timeline en dos niveles: Pestañas y columnas.</p>
 

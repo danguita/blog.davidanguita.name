@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac OS X | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/mac-os-x/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2015-08-26T20:22:37+02:00</updated>
+  <updated>2015-08-26T20:41:48+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MacPorts, imprescindible para el switcher desde GNU/Linux]]></title>
-    <link href="http://blog.davidanguita.name/macports-imprescindible-para-el-switcher-desde-gnu-linux/"/>
+    <link href="http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux/"/>
     <updated>2009-11-08T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/macports-imprescindible-para-el-switcher-desde-gnu-linux</id>
+    <id>http://blog.davidanguita.name/2009/11/08/macports-imprescindible-para-el-switcher-desde-gnu-linux</id>
     <content type="html"><![CDATA[<p>Siempre que en la comunidad Mac nos referimos a switcher, todo nos lleva a pensar que se trata de un usuario que abandona el tedioso Microsoft Windows para pasar a Mac OS X, aunque no es menos habitual que un switcher proceda de otros Sistemas Operativos como GNU/Linux. Este fue mi caso concreto, aunque no puedo considerarme switcher ya que nunca abandoné mi sistema original, los compagino muy a menudo aunque es cierto que el sistema en el que trabajo más horas diarias es OS X.</p>
 
 <p>Los usuarios de GNU/Linux en prácticamente cualquiera de sus distribuciones estarán habituados al concepto de sistema de gestión de paquetes (como es APT en distribuciones Debian/Ubuntu), algo de lo que no podemos disfrutar nativamente en nuestros OS X y que nos abstraería de arduas instalaciones de software desde los fuentes.</p>
