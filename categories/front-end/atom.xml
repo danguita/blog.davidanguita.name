@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Front-end | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/front-end/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2014-04-20T21:20:24+02:00</updated>
+  <updated>2015-08-26T20:22:37+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[CSS extendido con LESS]]></title>
-    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
+    <link href="http://blog.davidanguita.name/css-extendido-con-less/"/>
     <updated>2009-12-05T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
+    <id>http://blog.davidanguita.name/css-extendido-con-less</id>
     <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
 
 <p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>

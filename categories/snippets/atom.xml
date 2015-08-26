@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Snippets | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/snippets/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2014-04-20T21:20:24+02:00</updated>
+  <updated>2015-08-26T20:22:37+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Repositorios de Snippets para todos]]></title>
-    <link href="http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos/"/>
+    <link href="http://blog.davidanguita.name/repositorios-de-snippets-para-todos/"/>
     <updated>2009-11-07T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2009/11/07/repositorios-de-snippets-para-todos</id>
+    <id>http://blog.davidanguita.name/repositorios-de-snippets-para-todos</id>
     <content type="html"><![CDATA[<p>Un buen medio de formación, inspiración o resolución de problemas de todo desarrollador de software siempre ha sido el código de ejemplo junto al API o manual de turno, es por ello que me gustaría recomendar algunos sitios web que recopilan Snippets o fragmentos de código con un propósito específico, modulares y por tanto reutilizables, escritos prácticamente en cualquier lenguaje. Algunos repositorios van más allá albergando scripts de sistema, ficheros de configuración de servicios, recomendaciones para el uso de editores de texto y un largo etcétera.
 La mayoría de estos sitios web incluyen completas posibilidades colaborativas, permitiendo así que cualquier usuario registrado pueda comentar y proponer alternativas o correcciones al contenido (en forma de Snippet) publicado por otro usuario.</p>
 

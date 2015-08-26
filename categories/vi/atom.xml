@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vi | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/vi/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2014-04-20T21:20:24+02:00</updated>
+  <updated>2015-08-26T20:22:37+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[La "Cheat Sheet" que todos hemos hecho alguna vez]]></title>
-    <link href="http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
+    <link href="http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
     <updated>2010-01-07T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
+    <id>http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
     <content type="html"><![CDATA[<p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
 
 <p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>

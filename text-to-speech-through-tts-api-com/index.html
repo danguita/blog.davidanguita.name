@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <link rel="canonical" href="http://davidanguita.name/articles/text-to-speech-through-tts-api-com/"/>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="refresh" content="0;url=http://davidanguita.name/articles/text-to-speech-through-tts-api-com/" />
+</head>
+
+
+<body>
+	<div class="container">
+		<aside class="left">
+			<div class="inner-left">
+				<header>
+					
+  <img src="http://www.gravatar.com/avatar/cd2e3ba306d19910a2900955667317ee?s=200" alt="Gravatar of David Anguita " title="Gravatar of David Anguita" class="profilepic" />
+
+
+<hgroup>
+  <h1><a href="/">I solve problems</a></h1>
+  <section>
+  
+    <h2>David Anguita</h2>
+  
+
+  <p>
+    Hi, I'm a freelance software developer &amp; consultant specialized in Ruby on Rails.
+  </p>
+  <p>
+    Take a look to my <a href="http://davidanguita.name">personal website</a>, send me <a href="mailto:david@davidanguita.name">an email</a> or follow me <a href="http://twitter.com/danguita">on Twitter</a>.
+  </p>
+</section>
+
+</hgroup>
+
+
+				</header>
+			</div>
+		</aside>
+    	<section class="right">
+    		<div class="inner-right">
+    			<div id="posts">
+    			  	<article class="post">
+    
+  <header>
+    
+      <h1 class="entry-title">Text.to_speech through tts-api.com</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T09:09:00+01:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This extremely simple Ruby module extends the String class by adding a <code>to_speech</code> method, so <code>text.to_speech</code> will perform a request to <a href="http://tts-api.com/">Text-to-Speech API</a> which produces a remote mp3 file that will be downloaded to the current directory (<code>curl</code> needed):</p>
+
+<ul>
+<li><code>text.to_speech</code> &rarr; <code>text.mp3</code></li>
+</ul>
+
+
+<h4>Usage</h4>
+
+<div><script src='https://gist.github.com/4065761.js?file=tts-usage.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+require_relative 'tts'
+
+class String
+  include TTS::String
+end
+
+&quot;fuck yeah&quot;.to_speech</code></pre></noscript></div>
+
+
+
+
+<!-- more -->
+
+
+<h4>Code</h4>
+
+<div><script src='https://gist.github.com/4065761.js?file=tts.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+# string.to_speech through tts-api.com
+
+require 'net/http'
+
+SERVICE_URI_FORMAT = &quot;http://tts-api.com/tts.mp3?q=%s&quot;
+
+module TTS
+  class Speech
+    def initialize text
+      response  = get_response(SERVICE_URI_FORMAT % text.to_url)
+
+      @text     = text
+      @location = response['location']
+      @filename = text.to_filename('mp3')
+    end
+
+    def to_mp3
+      download_here @location, @filename
+    end
+
+    def to_s
+      [@text, @location, @filename].join(' -&gt; ')
+    end
+
+    private
+
+    def get_response service_uri
+      Net::HTTP.get_response(URI.parse(service_uri))
+    end
+
+    def download_here url, filename
+      system &quot;curl -o #{filename} #{url}&quot;
+    end
+  end
+
+  module String
+    def to_speech
+      speech = Speech.new(self)
+
+      puts speech
+
+      speech.to_mp3
+    end
+
+    def to_url
+      gsub(' ', '+').safe
+    end
+
+    def to_filename extension = 'bin'
+      [(gsub(' ', '_')).safe, extension].join('.')
+    end
+
+    def safe
+      downcase.strip.gsub(/[^\w-]/, '')
+    end
+  end
+end</code></pre></noscript></div>
+
+
+
+</div>
+
+
+</article>
+
+
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.davidanguita.name/text-to-speech-through-tts-api-com/" data-via="danguita" data-counturl="http://blog.davidanguita.name/text-to-speech-through-tts-api-com/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+
+
+    			</div>
+    			<footer id="footer">
+    				<p class="credit">
+  Copyright &copy; 2015 - David Anguita. Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+
+
+    			</footer>
+    			
+
+<script type="text/javascript">
+      var disqus_shortname = 'isolveproblems';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.davidanguita.name/text-to-speech-through-tts-api-com/';
+        var disqus_url = 'http://blog.davidanguita.name/text-to-speech-through-tts-api-com/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-45408606-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+    		</div>
+    	</section>
+  	</div>
+</body>
+</html>

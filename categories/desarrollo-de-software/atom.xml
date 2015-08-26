@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Desarrollo de software | I solve problems]]></title>
   <link href="http://blog.davidanguita.name/categories/desarrollo-de-software/atom.xml" rel="self"/>
   <link href="http://blog.davidanguita.name/"/>
-  <updated>2014-04-20T21:20:24+02:00</updated>
+  <updated>2015-08-26T20:22:37+02:00</updated>
   <id>http://blog.davidanguita.name/</id>
   <author>
     <name><![CDATA[David Anguita]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Dropbox para sincronizar tus equipos de trabajo]]></title>
-    <link href="http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
+    <link href="http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo/"/>
     <updated>2010-08-19T00:00:00+02:00</updated>
-    <id>http://blog.davidanguita.name/2010/08/19/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
+    <id>http://blog.davidanguita.name/dropbox-para-sincronizar-tus-equipos-de-trabajo</id>
     <content type="html"><![CDATA[<p>Por muchos es conocida Dropbox, aplicación que nos permite almacenar archivos en la nube con objetivo de compartirlos, mantenerlos sincronizados entre varios equipos, realizar un backup de los más críticos o simplemente disponer de una versión accesible vía web de los mismos. Aprovechando la integración de Dropbox con los distintos sistemas de archivos podemos utilizarlo para sincronizar automáticamente los archivos esenciales, que en mi caso son los que me permitan tener un entorno de desarrollo preparado en el menor tiempo posible.</p>
 
 <p>Habitualmente trabajo con sistemas UNIX (Mac OS X y GNU/Linux) por lo que empleo enlaces simbólicos para enlazar los archivos que necesito sincronizar en el directorio Dropbox, de esta forma:</p>
@@ -100,9 +100,9 @@ cliente Dropbox.</p>
   
   <entry>
     <title type="html"><![CDATA[La "Cheat Sheet" que todos hemos hecho alguna vez]]></title>
-    <link href="http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
+    <link href="http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez/"/>
     <updated>2010-01-07T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2010/01/07/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
+    <id>http://blog.davidanguita.name/la-cheat-sheet-que-todos-hemos-hecho-alguna-vez</id>
     <content type="html"><![CDATA[<p>Existen cientos de <em>Cheat Sheets</em> o chuletas que los desarrolladores de software creamos –y generalmente compartimos– con objetivo de reunir la información más relevante y práctica acerca del uso de un editor de textos complejo, un framework, un lenguaje de programación, un sistema operativo, una metodología de desarrollo y un largo etcétera.</p>
 
 <p>Me ha sorprendido encontrarme con una Cheat Sheet muy similar a las que suelo acumular en mi espacio de trabajo, además de ser realmente completa al tratar un editor de textos complejo, a la par que genial, como es Vi.</p>
@@ -122,9 +122,9 @@ cliente Dropbox.</p>
   
   <entry>
     <title type="html"><![CDATA[CSS extendido con LESS]]></title>
-    <link href="http://blog.davidanguita.name/2009/12/05/css-extendido-con-less/"/>
+    <link href="http://blog.davidanguita.name/css-extendido-con-less/"/>
     <updated>2009-12-05T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2009/12/05/css-extendido-con-less</id>
+    <id>http://blog.davidanguita.name/css-extendido-con-less</id>
     <content type="html"><![CDATA[<p>Ante lo tosco –sintácticamente hablando– que puede resultar un desarrollo CSS atendiendo a las especificaciones actuales, numerosos son los frameworks CSS o utilidades que surgen con el objetivo de flexibilizar este proceso.</p>
 
 <p>LESS es una gema Ruby que nos permite generar ficheros CSS a partir de su propia especificación, que no es otra que una extensión de CSS con cuatro mejoras fundamentales:</p>
@@ -238,9 +238,9 @@ cliente Dropbox.</p>
   
   <entry>
     <title type="html"><![CDATA[Resaltado de sintaxis en Aptana Studio]]></title>
-    <link href="http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio/"/>
+    <link href="http://blog.davidanguita.name/resaltado-de-sintaxis-en-aptana-studio/"/>
     <updated>2009-11-27T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2009/11/27/resaltado-de-sintaxis-en-aptana-studio</id>
+    <id>http://blog.davidanguita.name/resaltado-de-sintaxis-en-aptana-studio</id>
     <content type="html"><![CDATA[<p>Los que pasamos muchas horas delante de un IDE vamos adoptando ciertas preferencias en cuanto a la paleta de colores más cómoda para resaltar sintaxis en nuestro editor de código. Si trabajamos con poca luz ambiental un contraste positivo (texto oscuro sobre fondo blanco) puede ser molesto e incluso hacer que nos cansemos o despistemos. Personalmente prefiero trabajar con un contraste invertido (texto claro sobre fondo oscuro).</p>
 
 <p>Aunque en Aptana Studio (conocido IDE basado en Eclipse) existe la posibilidad de personalizar nuestros esquemas de color, he reunido algunos esquemas creados por diferentes usuarios que me parecen especialmente cómodos.</p>
@@ -293,9 +293,9 @@ cliente Dropbox.</p>
   
   <entry>
     <title type="html"><![CDATA[Distribución del Runtime Adobe AIR]]></title>
-    <link href="http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air/"/>
+    <link href="http://blog.davidanguita.name/distribucion-del-runtime-adobe-air/"/>
     <updated>2009-11-26T00:00:00+01:00</updated>
-    <id>http://blog.davidanguita.name/2009/11/26/distribucion-del-runtime-adobe-air</id>
+    <id>http://blog.davidanguita.name/distribucion-del-runtime-adobe-air</id>
     <content type="html"><![CDATA[<p>Recientemente he trabajado con la tecnología <em>Adobe AIR 1.5</em> en su perfil AJAX, que nos permite desarrollar RIA (<em>Rich Internet Applications</em>) como aplicaciones de escritorio multisistema. Aunque esta característica no es un concepto nuevo (otras tecnologías como Google Gears o Sun JavaFX tienen propósitos muy similares) y podríamos profundizar bastante en sus virtudes, hoy quiero centrarme en las condiciones de distribución del Runtime Adobe AIR.</p>
 
 <p>Básicamente existen dos perfiles principales de distribución del Runtime, que recordemos es necesario instalar en las máquinas cliente para ejecutar nuestras aplicaciones.</p>
@@ -317,7 +317,7 @@ cliente Dropbox.</p>
 
 <blockquote><p>El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples clientes en un entorno de intranet cerrado.
 El receptor de la licencia puede distribuir el tiempo de ejecución de Adobe AIR a múltiples usuarios finales incluyendo instaladores del tiempo de ejecución de Adobe AIR en CD, DVD u otros soportes físicos.
-El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#108;&#105;&#99;&#101;&#x6e;&#115;&#101;&#45;&#97;&#105;&#x72;&#x40;&#97;&#100;&#x6f;&#98;&#x65;&#x2e;&#99;&#x6f;&#109;">&#108;&#105;&#x63;&#x65;&#x6e;&#115;&#101;&#x2d;&#97;&#105;&#x72;&#x40;&#97;&#x64;&#111;&#98;&#101;&#x2e;&#99;&#111;&#109;</a> para obtener más información.
+El receptor de la licencia sólo puede distribuir instaladores de Adobe AIR para su uso en plataformas compatibles; por ejemplo, los dispositivos que no son PC y los sistemas integrados no son plataformas compatibles. Si desea volver a distribuir el tiempo de ejecución de Adobe AIR en sistemas operativos o dispositivos no compatibles, póngase en contacto con Adobe en la dirección <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#x6c;&#x69;&#99;&#101;&#x6e;&#x73;&#x65;&#45;&#x61;&#x69;&#114;&#64;&#97;&#100;&#x6f;&#x62;&#101;&#x2e;&#99;&#111;&#109;">&#x6c;&#x69;&#x63;&#101;&#x6e;&#115;&#x65;&#45;&#97;&#x69;&#114;&#x40;&#x61;&#100;&#111;&#98;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a> para obtener más información.
 El receptor de la licencia puede distribuir los archivos del tiempo de ejecución de Adobe AIR como parte de su producto de software o incluidos en un instalador original.
 El receptor de la licencia debe distribuir los instaladores y los archivos de Adobe AIR tal cual, sin ninguna modificación.
 Los receptores de la licencia, si lo desean, podrán mostrar los logotipos &ldquo;Includes Adobe AIR&rdquo; (&ldquo;Incluye Adobe AIR&rdquo;) en productos o sitios de la intranet, según las directrices de marcas comerciales de Adobe.
